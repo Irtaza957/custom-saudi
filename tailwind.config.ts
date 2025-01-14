@@ -13,6 +13,7 @@ export default {
         foreground: "var(--foreground)",
         gray100: '#DDD',
         gray200: '#888',
+        gray300: '#111',
       },
     },
   },

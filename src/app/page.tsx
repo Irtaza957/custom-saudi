@@ -1,6 +1,7 @@
 'use client'
 import { Car } from '@/assets'
 import { ServiceCard } from '@/components/booking/Card'
+import { Footer } from '@/components/booking/Footer'
 import { NavMenu } from '@/components/booking/Sidebar'
 import { VehicleSelector } from '@/components/booking/VehicleSelector'
 import Image from 'next/image'
@@ -21,7 +22,7 @@ export default function Home() {
   return (
     <div>
       {/* Main Content */}
-      <main className="container mx-auto py-6 w-full h-screen overflow-hidden">
+      <main className="lg:container lg:mx-auto lg:py-6 w-full lg:h-screen overflow-hidden">
         <div className="flex flex-col lg:flex-row items-start justify-between w-full">
           {/* Car Image */}
           <div className='w-full'>
@@ -45,7 +46,7 @@ export default function Home() {
           </div>
 
           {/* Service Selection */}
-          <div className="space-y-6 w-full lg:w-[35%]">
+          <div className="space-y-6 w-full lg:w-[35%] px-6 lg:px-0">
             {/* Tabs */}
             <div className="flex gap-4 border-b border-gray-200 bg-[rgba(0,00,0.99)] rounded-lg overflow-auto whitespace-nowrap w-[calc(100%-2px)] no-scrollbar">
               {['POLISH', 'THERMAL TINT', 'PROTECTION FILM', 'Smooth Polishing'].map((tab) => (
@@ -64,7 +65,7 @@ export default function Home() {
             </div>
 
             {/* Service Cards */}
-            <div className="space-y-2 overflow-auto h-[calc(100vh-100px)] no-scrollbar">
+            <div className="flex lg:flex-col gap-2 space-y-2 overflow-auto lg:h-[calc(100vh-170px)] no-scrollbar">
               {services.map((service) => (
                 <ServiceCard key={service.title} {...service} />
               ))}
@@ -72,6 +73,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

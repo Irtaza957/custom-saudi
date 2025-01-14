@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Import the Roboto font
+const roboto = Roboto({
+  variable: "--font-roboto", // Define a CSS variable for the font
+  subsets: ["latin"], // Include Latin subset
+  weight: ["400", "500", "700"], // Specify font weights you want to include
 });
 
 export const metadata: Metadata = {
@@ -25,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-100`}
+        className={`${roboto.variable} antialiased min-h-screen bg-gray-100`} // Use the Roboto variable
         suppressHydrationWarning
       >
         {children}
