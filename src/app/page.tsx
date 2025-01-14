@@ -1,101 +1,78 @@
-import Image from "next/image";
+'use client'
+import { Car } from '@/assets'
+import { ServiceCard } from '@/components/booking/Card'
+import { NavMenu } from '@/components/booking/Sidebar'
+import { VehicleSelector } from '@/components/booking/VehicleSelector'
+import Image from 'next/image'
+import { useState } from 'react'
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [selectedTab, setSelectedTab]=useState('POLISH')
+  const services = [
+    { title: 'Bright Polishing', price: 10600, originalPrice: 12000 },
+    { title: 'Detailgio Full Polishing', price: 10600, originalPrice: 12000 },
+    { title: 'Aqueous Bright Polishing', price: 10600, originalPrice: 12000 },
+  ]
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleSelectTab=(value: string)=>{
+    setSelectedTab(value)
+  }
+
+  return (
+    <div>
+      {/* Main Content */}
+      <main className="container mx-auto py-6 w-full h-screen overflow-hidden">
+        <div className="flex flex-col lg:flex-row items-start justify-between w-full">
+          {/* Car Image */}
+          <div className='w-full'>
+            <header className="bg-zinc-900 text-white p-4 rounded-lg w-full lg:w-[50%]">
+              <div className="container mx-auto flex justify-between items-center">
+                <div className="flex items-center gap-7">
+                  <span className="font-bold text-lg">CUSTOM</span>
+                  <VehicleSelector />
+                </div>
+                <NavMenu />
+              </div>
+            </header>
+            <div className="relative overflow-hidden w-full h-[400px] lg:h-[600px]">
+              <Image
+                src={Car}
+                alt="Car"
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Service Selection */}
+          <div className="space-y-6 w-full lg:w-[35%]">
+            {/* Tabs */}
+            <div className="flex gap-4 border-b border-gray-200 bg-[rgba(0,00,0.99)] rounded-lg overflow-auto whitespace-nowrap w-[calc(100%-2px)] no-scrollbar">
+              {['POLISH', 'THERMAL TINT', 'PROTECTION FILM', 'Smooth Polishing'].map((tab) => (
+                <button
+                  key={tab}
+                  className={`px-4 py-2 text-sm hover:bg-[rgba(104,104,104,0.50)] capitalize hover:text-white rounded-lg transition-all 
+                    ${tab === selectedTab
+                    ? 'text-white font-semibold bg-[rgba(104,104,104,0.50)]'
+                    : 'text-gray200 hover:text-gray-700'
+                    }`}
+                    onClick={()=>handleSelectTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            {/* Service Cards */}
+            <div className="space-y-2 overflow-auto h-[calc(100vh-100px)] no-scrollbar">
+              {services.map((service) => (
+                <ServiceCard key={service.title} {...service} />
+              ))}
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
+

@@ -11,6 +11,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        gray100: '#DDD',
+        gray200: '#888',
       },
     },
   },
