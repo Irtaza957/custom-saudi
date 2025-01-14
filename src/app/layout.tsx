@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import { Footer } from "@/components/booking/Footer";
 
 // Import the Roboto font
 const roboto = Roboto({
@@ -26,6 +27,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <Footer/>
       </body>
     </html>
   );

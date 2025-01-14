@@ -1,7 +1,6 @@
 'use client'
 import { Car } from '@/assets'
 import { ServiceCard } from '@/components/booking/Card'
-import { Footer } from '@/components/booking/Footer'
 import { NavMenu } from '@/components/booking/Sidebar'
 import { VehicleSelector } from '@/components/booking/VehicleSelector'
 import Image from 'next/image'
@@ -73,7 +72,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   )
 }
