@@ -12,6 +12,7 @@ interface ServiceCardProps {
 
 export function ServiceCard({ title, price, originalPrice }: ServiceCardProps) {
   const [selectedCard, setSelectedCard] = useState<string[]>([])
+  // const [service, setService]=useState<number | null>(null)
   const handleSelectCard = () => {
     if(selectedCard.includes(title)){
       setSelectedCard(prev=> prev.filter(item=> item!==title)) 
@@ -21,16 +22,16 @@ export function ServiceCard({ title, price, originalPrice }: ServiceCardProps) {
   }
   return (
     <div className={cn(
-      "bg-white rounded-lg px-6 py-4 space-y-4 border-4 border-white transition-all cursor-pointer",
-      selectedCard.includes(title) && 'border-black'
+      "bg-white rounded-lg px-6 py-4 space-y-4 border-4 border-white transition-all cursor-pointer"
+      // selectedCard.includes(title) && 'border-black'
     )} 
-    onClick={handleSelectCard}>
+    >
       <div className="flex justify-between items-center">
         <h3 className="font-bold">{title}</h3>
         <button className={cn(
-          "flex gap-2 text-sm text-gray-600 hover:text-gray-900 border border-gray100 rounded-full px-3 py-2",
+          "flex gap-2 text-sm text-gray-600 border border-gray100 rounded-full px-3 py-2",
           selectedCard.includes(title) && 'bg-[rgba(0,00,0.99)] text-white'
-          )}>
+          )} onClick={handleSelectCard}>
           {selectedCard.includes(title) ? 'Selected' : 'Select'}
           {selectedCard.includes(title) &&
           <div className="relative overflow-hidden w-5 h-5">

@@ -5,27 +5,34 @@ import { NavMenu } from '@/components/booking/Sidebar'
 import { VehicleSelector } from '@/components/booking/VehicleSelector'
 import Image from 'next/image'
 import { useState } from 'react'
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 export default function Home() {
-  const [selectedTab, setSelectedTab]=useState('POLISH')
+  const [selectedTab, setSelectedTab] = useState('POLISH')
+  const [activeSlide, setActiveSlide] = useState(0);
   const services = [
     { title: 'Bright Polishing', price: 10600, originalPrice: 12000 },
     { title: 'Detailgio Full Polishing', price: 10600, originalPrice: 12000 },
     { title: 'Aqueous Bright Polishing', price: 10600, originalPrice: 12000 },
   ]
 
-  const handleSelectTab=(value: string)=>{
+  const handleSelectTab = (value: string) => {
     setSelectedTab(value)
   }
 
+  const handleSlideChange = (index: number) => {
+    setActiveSlide(index);
+  };
+  console.log(activeSlide, 'activeSlideactiveSlide')
   return (
     <div>
       {/* Main Content */}
-      <main className="lg:container lg:mx-auto lg:py-6 w-full lg:h-screen overflow-hidden">
+      <main className="lg:container lg:mx-auto pb-10 lg:py-6 w-full lg:h-screen overflow-hidden">
         <div className="flex flex-col lg:flex-row items-start justify-between w-full">
           {/* Car Image */}
           <div className='w-full'>
-            <header className="bg-zinc-900 text-white p-4 rounded-lg w-full lg:w-[50%]">
+            <header className="bg-zinc-900 text-white p-4 lg:rounded-lg w-full lg:w-[50%]">
               <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center gap-7">
                   <span className="font-bold text-lg">CUSTOM</span>
@@ -53,10 +60,10 @@ export default function Home() {
                   key={tab}
                   className={`px-4 py-2 text-sm hover:bg-[rgba(104,104,104,0.50)] capitalize hover:text-white rounded-lg transition-all 
                     ${tab === selectedTab
-                    ? 'text-white font-semibold bg-[rgba(104,104,104,0.50)]'
-                    : 'text-gray200 hover:text-gray-700'
+                      ? 'text-white font-semibold bg-[rgba(104,104,104,0.50)]'
+                      : 'text-gray200 hover:text-gray-700'
                     }`}
-                    onClick={()=>handleSelectTab(tab)}
+                  onClick={() => handleSelectTab(tab)}
                 >
                   {tab}
                 </button>
@@ -64,10 +71,20 @@ export default function Home() {
             </div>
 
             {/* Service Cards */}
-            <div className="flex lg:flex-col gap-2 space-y-2 overflow-auto lg:h-[calc(100vh-170px)] no-scrollbar">
+            <div className="hidden lg:block gap-2 space-y-2 overflow-auto lg:h-[calc(100vh-170px)] no-scrollbar">
               {services.map((service) => (
                 <ServiceCard key={service.title} {...service} />
               ))}
+            </div>
+            <div className='relative'>
+              <Carousel
+                onChange={handleSlideChange}
+                showArrows={true}
+              >
+                {services.map((service) => (
+                  <ServiceCard key={service.title} {...service} />
+                ))}
+              </Carousel>
             </div>
           </div>
         </div>
