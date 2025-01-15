@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
 import "./globals.css";
+
+// Import the Roboto font
+const roboto = Roboto({
+  variable: "--font-roboto", // Define a CSS variable for the font
+  subsets: ["latin"], // Include Latin subset
+  weight: ["400", "500", "700"], // Specify font weights you want to include
+});
 
 export const metadata: Metadata = {
   title: "Booking Page",
@@ -12,6 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>{children}</>
+    <html lang="en">
+    <body
+        className={`${roboto.variable} antialiased min-h-screen bg-gray-100`} // Use the Roboto variable
+        suppressHydrationWarning
+      >
+        {children}
+      </body>
+    </html>
   );
 }
