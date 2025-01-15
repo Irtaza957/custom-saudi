@@ -1,6 +1,9 @@
 import Car from "./images/car.gif";
 import Tabby from "./images/tabby.svg";
 import Tamara from "./images/tamara.svg";
+import Mada from "./images/mada.svg";
+import Mastercard from "./images/mastercard.svg";
+import Visa from "./images/visa.svg";
 import CheckedIcon from "./icons/checked.svg";
 
-export { Car, Tabby, Tamara, CheckedIcon };
+export { Car, Tabby, Tamara, CheckedIcon, Mada, Visa, Mastercard };

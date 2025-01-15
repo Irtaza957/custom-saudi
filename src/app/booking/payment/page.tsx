@@ -1,8 +1,11 @@
+import Payment from "@/components/payment/Payment"
+import { OrderSummary } from "@/components/slots/OrderSummary"
 
-export default function Payment() {
+export default function PaymentForm() {
   return (
-    <div>
-      payment
+    <div className="flex flex-col md:flex-row justify-between w-full">
+      <Payment/>
+      <div className="px-6 md:px-0 w-full md:w-[40%]"><OrderSummary/></div>
     </div>
   )
 }
