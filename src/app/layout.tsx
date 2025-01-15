@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body
-        className={`${roboto.variable} antialiased min-h-screen bg-gray-100`} // Use the Roboto variable
+        className={`${roboto.variable}`} // Use the Roboto variable
         suppressHydrationWarning
       >
         {children}

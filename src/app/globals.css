@@ -30,3 +30,48 @@ body {
     }
   }
 }
+
+.dayPicker .rdp-month_grid {
+  width: 100%;
+}
+
+.dayPicker .rdp-weekday{
+  font-size: 18px;
+  font-weight: 600;
+  /* width: 60px;
+  height: 60px; */
+}
+
+.rdp-outside{
+  opacity: 0.5;
+}
+
+.dayPicker .rdp-months{
+  width: 100%;
+  max-width: inherit;
+}
+
+.dayPicker .rdp-month{
+  width: 100%;
+}
+
+.dayPicker .rdp-weekday{
+  text-align: start;
+  padding-left: 10px;
+}
+
+.dayPicker .rdp-day{
+  height: 60px;
+}
+
+.dayPicker .rdp-month_caption{
+  display: none;
+}
+
+.rdp-selected .rdp-day_button{
+  border: none !important;
+  background: rgba(136, 136, 136, 0.10);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: black;
+}

@@ -1,6 +1,6 @@
 export function OrderSummary() {
     return (
-      <div className="p-8 bg-gray-50">
+      <div className="p-8 bg-white w-full md:h-screen mt-5 md:mt-0">
         <h2 className="text-lg font-semibold mb-6">Order Summary</h2>
         
         <div className="space-y-4">
@@ -27,7 +27,7 @@ export function OrderSummary() {
           </div>
   
           <div className="pt-6 border-t space-y-6">
-            <div>
+            <div className="flex justify-between">
               <p className="text-sm text-gray-600 mb-2">Date</p>
               <p className="font-medium">Wed 20 Nov 2024 12:30 AM</p>
             </div>
@@ -38,9 +38,6 @@ export function OrderSummary() {
                 placeholder="Enter Voucher Code"
                 className="w-full p-2.5 border rounded-lg text-sm"
               />
-              <button className="w-full bg-white text-blue-600 border border-blue-600 py-2.5 rounded-lg text-sm font-medium">
-                APPLY
-              </button>
             </div>
   
             <div className="space-y-3 pt-3">

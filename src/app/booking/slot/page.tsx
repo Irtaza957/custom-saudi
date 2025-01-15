@@ -4,20 +4,22 @@ import { TimeSlots } from "../../../components/slots/TimeSots";
 
 export default function Slots() {
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-    <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-sm">
-      <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x">
-        <div>
-          <h1 className="px-6 py-4 font-semibold text-lg border-b">
-            Select Date and Time
-          </h1>
-          <Calendar />
-          <TimeSlots />
+    <div className="min-h-screen bg-gray-50">
+      <div className="rounded-xl shadow-sm">
+        <div className="flex flex-col md:flex-row justify-between w-full">
+          <div className="w-full px-10 mt-8">
+            <h1 className="px-1 py-5 font-semibold text-2xl">
+              Select Date and Time
+            </h1>
+            <div className="flex flex-col lg:flex-row w-full">
+              <Calendar />
+              <TimeSlots />
+            </div>
+          </div>
+          <div className="px-10 md:px-0 w-full md:w-[50%]"><OrderSummary /></div>
         </div>
-        <OrderSummary />
       </div>
     </div>
-  </div>
   )
 }
 
