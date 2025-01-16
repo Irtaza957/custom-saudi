@@ -9,20 +9,20 @@ export function Footer() {
   const router = useRouter()
 
   const handleNext = () => {
-    if (pathname === '/booking/slot') {
-      router.push('/booking/payment')
-    } else if (pathname === '/booking') {
-      router.push('/booking/slot')
+    if (pathname.includes('/booking/slot')) {
+      router.push('payment')
+    } else if (pathname .includes('/booking')) {
+      router.push('booking/slot')
     } else {
-      router.push('/booking')
+      router.push('booking')
     }
   }
 
   const handleBack = () => {
-    if (pathname === '/booking/slot') {
-      router.push('/booking')
-    } else if (pathname === '/booking/payment') {
-      router.push('/booking/slot')
+    if (pathname.includes('/booking/slot')) {
+      router.push('booking')
+    } else if (pathname.includes('/booking/payment')) {
+      router.push('slot')
     }
   }
   return (

@@ -1,6 +1,7 @@
-import { Calendar } from "../../../components/slots/Calender";
-import { OrderSummary } from "../../../components/slots/OrderSummary";
-import { TimeSlots } from "../../../components/slots/TimeSots";
+import { Calendar } from "@/components/slots/Calender";
+import { OrderSummary } from "@/components/slots/OrderSummary";
+import { TimeSlots } from "@/components/slots/TimeSots";
+
 
 export default function Slots() {
   return (
