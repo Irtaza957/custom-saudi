@@ -7,10 +7,19 @@ import Image from 'next/image'
 import { useState } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { useTranslations } from 'next-intl'
+import { usePathname, useRouter } from 'next/navigation'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/UI/Dropdown'
+import { ChevronDown } from 'lucide-react'
 
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState('POLISH')
   const [activeSlide, setActiveSlide] = useState(0);
+  const router = useRouter();
+  const pathname = usePathname();
+  const [selectedLang, setSelectedLang] = useState(pathname?.split('/')?.[1])
+  console.log(pathname?.split('/'), 'pathnamepathname')
+  const t = useTranslations()
   const services = [
     { title: 'Bright Polishing', price: 10600, originalPrice: 12000 },
     { title: 'Detailgio Full Polishing', price: 10600, originalPrice: 12000 },
@@ -24,7 +33,27 @@ export default function Home() {
   const handleSlideChange = (index: number) => {
     setActiveSlide(index);
   };
-  console.log(activeSlide, 'activeSlideactiveSlide')
+
+  const handleLanguageChange = (locale: string) => {
+    setSelectedLang(locale);
+    const segments = pathname.split('/').filter(Boolean);
+  
+    // Handle locale at the first segment
+    if (['en', 'ar'].includes(segments[0])) {
+      segments[0] = locale;
+    } else {
+      segments.unshift(locale);
+    }
+  
+    // Construct the new path and navigate
+    const newPath = `/${segments.join('/')}`;
+    router.push(newPath);
+    setTimeout(()=>{
+      window.location.reload()
+    },1000)
+  };
+  
+
   return (
     <div>
       {/* Main Content */}
@@ -36,7 +65,31 @@ export default function Home() {
               <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center gap-7">
                   <span className="font-bold text-lg">CUSTOM</span>
+                  <div className='flex gap-3'>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="flex items-center gap-1 text-sm hover:text-gray-300 transition-colors">
+                      {selectedLang}
+                      <ChevronDown className="h-4 w-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      className="w-40 bg-zinc-900 border-zinc-800"
+                    >
+                      <DropdownMenuItem
+                        onClick={() => handleLanguageChange('en')}
+                        className="text-sm text-white hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer"
+                      >
+                        en
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => handleLanguageChange('ar')}
+                        className="text-sm text-white hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer"
+                      >
+                        ar
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                   <VehicleSelector />
+                  </div>
                 </div>
                 <NavMenu />
               </div>
@@ -52,10 +105,10 @@ export default function Home() {
           </div>
 
           {/* Service Selection */}
-          <div className="space-y-6 w-full lg:w-[35%] px-6 lg:px-0">
+          <div className="space-y-6 w-full lg:max-w-[35%] px-6 lg:px-0">
             {/* Tabs */}
             <div className="flex gap-4 border-b border-gray-200 bg-[rgba(0,00,0.99)] rounded-lg overflow-auto whitespace-nowrap w-[calc(100%-2px)] no-scrollbar">
-              {['POLISH', 'THERMAL TINT', 'PROTECTION FILM', 'Smooth Polishing'].map((tab) => (
+              {['POLISH', 'THERMAL TINT', 'PROTECTION FILM', 'NANO CERAMIC'].map((tab) => (
                 <button
                   key={tab}
                   className={`px-4 py-2 text-sm hover:bg-[rgba(104,104,104,0.50)] capitalize hover:text-white rounded-lg transition-all 
@@ -65,7 +118,7 @@ export default function Home() {
                     }`}
                   onClick={() => handleSelectTab(tab)}
                 >
-                  {tab}
+                  {t(tab)}
                 </button>
               ))}
             </div>
