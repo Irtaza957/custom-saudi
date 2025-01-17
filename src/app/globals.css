@@ -51,8 +51,7 @@ body {
 .dayPicker .rdp-weekday{
   font-size: 18px;
   font-weight: 600;
-  /* width: 60px;
-  height: 60px; */
+  color: black;
 }
 
 .rdp-outside{

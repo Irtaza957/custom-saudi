@@ -15,7 +15,7 @@ export function TimeSlots() {
     }
 
     return (
-        <div className="p-6 flex items-center w-full lg:w-[50%] justify-center bg-white border-l">
+        <div className="p-6 flex items-center w-full lg:w-[50%] justify-center bg-white border-t lg:border-l rounded-bl-lg rounded-br-lg lg:rounded-tr-lg lg:rounded-br-lg">
             <div className="space-y-6">
                 <div className="space-y-3">
                     <div className="flex flex-wrap items-center justify-center gap-4">
