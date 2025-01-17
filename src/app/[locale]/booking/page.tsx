@@ -4,7 +4,7 @@ import { ServiceCard } from '@/components/booking/Card'
 import { NavMenu } from '@/components/booking/Sidebar'
 import { VehicleSelector } from '@/components/booking/VehicleSelector'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { useLocale, useTranslations } from 'next-intl'
@@ -16,20 +16,18 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import { useDispatch } from 'react-redux'
 import { setServiceType } from '@/store/slices/booking'
+import { services } from '@/libs/utils/constants'
 export default function Home() {
-  const [activeSlide, setActiveSlide] = useState(0);
   const router = useRouter();
   const pathname = usePathname();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [selectedService, setSelectedService] = useState<number | null>(null)
   const [selectedLang, setSelectedLang] = useState(pathname?.split('/')?.[1])
   const serviceType = useSelector((state: RootState) => state.booking.serviceType);
+  const carType=useSelector((state:RootState)=>state.booking.carType)
   const dispatch=useDispatch()
   const t = useTranslations()
   const locale=useLocale()
-  const services = [
-    { title: 'Bright Polishing', price: 10600, originalPrice: 12000 },
-    { title: 'Detailgio Full Polishing', price: 10600, originalPrice: 12000 },
-    { title: 'Aqueous Bright Polishing', price: 10600, originalPrice: 12000 },
-  ]
 
   const handleSelectTab = (value: string) => {
     dispatch(setServiceType(value))
@@ -58,6 +56,9 @@ export default function Home() {
     }, 1000)
   };
 
+  const servicesData=useMemo(()=>{
+    return services.filter((service)=>service.carType===carType && service.serviceType.toUpperCase()===serviceType.toUpperCase())
+  },[carType,serviceType])
 
   return (
     <div className='size-full'>
@@ -113,7 +114,7 @@ export default function Home() {
           <div className="space-y-6 w-full h-full lg:max-w-[35%] px-4 lg:px-0 flex flex-col">
             {/* Tabs */}
             <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="flex gap-4 border-b border-gray-200 bg-[rgba(0,00,0.99)] rounded-lg overflow-auto whitespace-nowrap w-[calc(100%-2px)] no-scrollbar">
-              {['POLISH', 'THERMAL TINT', 'PROTECTION FILM', 'NANO CERAMIC'].map((tab) => (
+              {['POLISHING', 'WINDOW FILM', 'PROTECTION FILM', 'NANO CERAMIC'].map((tab) => (
                 <button
                   key={tab}
                   className={`px-4 py-2 text-sm hover:bg-[rgba(104,104,104,0.50)] capitalize hover:text-white rounded-lg transition-all 
@@ -131,8 +132,8 @@ export default function Home() {
             {/* Service Cards */}
             <div className='hidden lg:block overflow-y-auto no-scrollbar lg:h-[calc(100vh-170px)] space-y-2'>
               <div className="flex-1 gap-2 space-y-2">
-                {services.map((service) => (
-                  <ServiceCard key={service.title} {...service} />
+                {servicesData.map((service) => (
+                  <ServiceCard key={service.id} selectedService={selectedService} setSelectedService={setSelectedService} {...service} />
                 ))}
               </div>
             </div>
@@ -141,8 +142,8 @@ export default function Home() {
                 onChange={handleSlideChange}
                 showArrows={true}
               >
-                {services.map((service) => (
-                  <ServiceCard key={service.title} {...service} />
+                {servicesData.map((service) => (
+                  <ServiceCard key={service.id} {...service} />
                 ))}
               </Carousel>
             </div>

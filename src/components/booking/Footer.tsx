@@ -3,15 +3,20 @@ import { ArrowDownToLine, Bolt, CalendarDays, ChevronLeft, CreditCard } from 'lu
 import { Button } from '@/components/UI/Button'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/libs/utils';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { services } from '@/libs/utils/constants';
+import { useMemo } from 'react';
 
 export function Footer() {
   const pathname = usePathname()
   const router = useRouter()
+  const { selectedServices } = useSelector((state: RootState) => state.booking)
 
   const handleNext = () => {
     if (pathname.includes('/booking/slot')) {
       router.push('payment')
-    } else if (pathname .includes('/booking')) {
+    } else if (pathname.includes('/booking')) {
       router.push('booking/slot')
     }
   }
@@ -19,6 +24,12 @@ export function Footer() {
   const handleBack = () => {
     router.back()
   }
+
+  const totalPrice = useMemo(() => {
+    return services?.filter(item => selectedServices?.find(service => service === item.id))?.reduce((acc, curr) => {
+      return acc + curr?.priceAfter
+    }, 0)
+  }, [selectedServices])
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -47,7 +58,7 @@ export function Footer() {
               'border rounded-full p-1.5',
               pathname.includes('/booking/slot') && 'border-black',
               pathname.includes('/booking/payment') && 'bg-black',
-              )}>
+            )}>
               <CalendarDays className={cn(
                 'w-[14px] h-[14px]',
                 pathname.includes('/booking/slot') && 'text-black',
@@ -59,7 +70,7 @@ export function Footer() {
             <div className={cn(
               'border rounded-full p-1.5',
               pathname.includes('/booking/payment') && 'border-black',
-              )}>
+            )}>
               <CreditCard className={cn(
                 'w-[14px] h-[14px] text-gray100',
                 pathname.includes('/booking/payment') && 'text-black',
@@ -69,7 +80,7 @@ export function Footer() {
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="text-sm font-medium text-[#585858]"><span className='font-semibold'>250</span> SAR</span>
+          {totalPrice ? <span className="text-sm font-medium text-[#585858]"><span className='font-semibold'>{totalPrice}</span> SAR</span> : null}
           <Button onClick={handleNext} className="md:bg-zinc-900 text-zinc-900 md:text-white font-bold text-sm hover:bg-zinc-800">
             NEXT
             <ArrowDownToLine className="ml-2 h-4 w-4" />

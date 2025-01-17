@@ -4,11 +4,14 @@ import { DayPicker } from 'react-day-picker'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from "react"
 import "react-day-picker/style.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { setSlot } from '@/store/slices/booking';
 
 export function Calendar() {
-  const [selected, setSelected] = useState<Date>(new Date())
   const [selectedMonthYear, setSelectedMonthYear] = useState<Date>(new Date())
-
+  const {slot} = useSelector((state: RootState)=>state.booking)
+  const dispatch = useDispatch()
   const handlePreviousMonth = () => {
     const previousMonth = new Date(
       selectedMonthYear.getFullYear(),
@@ -24,6 +27,10 @@ export function Calendar() {
     );
     setSelectedMonthYear(nextMonth);
   };
+
+  const handleSelectDate = (date: Date) => {
+    dispatch(setSlot({...slot, date}))
+  }
   return (
     <div className="p-6 bg-white w-full">
       <div className="flex items-center justify-between mb-4 w-full">
@@ -38,8 +45,8 @@ export function Calendar() {
       <div className="relative dayPicker">
         <DayPicker
           mode="single"
-          selected={selected}
-          onSelect={(date) => date && setSelected(date)}
+          selected={slot.date}
+          onSelect={(date) => date && handleSelectDate(date)}
           onMonthChange={(date) => date && setSelectedMonthYear(date)}
           showOutsideDays
           classNames={{

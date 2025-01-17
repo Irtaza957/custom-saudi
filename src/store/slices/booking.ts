@@ -1,11 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface BookingState {
+  carType: string
+  serviceType: string
+  selectedServices: number[]
+  slot: {
+    date: Date
+    time: string
+  }
+}
+
+const initialState: BookingState = {
   carType: 'SEDAN',
-  serviceType: 'POLISH',
+  serviceType: 'POLISHING',
+  selectedServices: [],
+  slot: {
+    date: new Date(),
+    time: '12:00 PM'
+  }
 };
 
-const appSlice = createSlice({
+const bookingSlice = createSlice({
   name: "booking",
   initialState,
   reducers: {
@@ -15,8 +30,14 @@ const appSlice = createSlice({
     setServiceType: (state, action) => {
       state.serviceType = action.payload;
     },
+    setSelectedServices: (state, action) => {
+      state.selectedServices = action.payload;
+    },
+    setSlot: (state, action) => {
+      state.slot = action.payload;
+    }
   },
 });
 
-export const { setCarType, setServiceType } = appSlice.actions;
-export default appSlice.reducer;
+export const { setCarType, setServiceType, setSelectedServices, setSlot } = bookingSlice.actions;
+export default bookingSlice.reducer;

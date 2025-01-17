@@ -1,40 +1,47 @@
 'use client'
 import { CheckedIcon, Tabby, Tamara } from "@/assets"
 import { cn } from "@/libs/utils"
+import { RootState } from "@/store"
+import { setSelectedServices } from "@/store/slices/booking"
 import Image from "next/image"
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 interface ServiceCardProps {
-  title: string
-  price: number
-  originalPrice: number
+  id: number
+  serviceName: string
+  priceAfter: number
+  priceBefore: number
+  selectedService?: number | null
+  setSelectedService?: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-export function ServiceCard({ title, price, originalPrice }: ServiceCardProps) {
-  const [selectedCard, setSelectedCard] = useState<string[]>([])
-  // const [service, setService]=useState<number | null>(null)
-  const handleSelectCard = () => {
-    if(selectedCard.includes(title)){
-      setSelectedCard(prev=> prev.filter(item=> item!==title)) 
-    }else{
-      setSelectedCard(prev=> [...prev, title])
+export function ServiceCard({ id, serviceName, priceAfter, priceBefore, selectedService, setSelectedService }: ServiceCardProps) {
+  const {selectedServices} = useSelector((state:RootState)=>state.booking)
+  const dispatch = useDispatch()
+  const handleSelectCard = (e:React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    if (selectedServices.includes(id)) {
+      dispatch(setSelectedServices(selectedServices.filter(item => item !== id)))
+    } else {
+      dispatch(setSelectedServices([...selectedServices, id]))
     }
   }
   return (
     <div className={cn(
-      "bg-white rounded-lg px-6 py-4 space-y-4 border-4 border-white transition-all cursor-pointer"
-      // selectedCard.includes(title) && 'border-black'
-    )} 
+      "bg-white rounded-lg px-6 py-4 space-y-4 border-4 border-white transition-all cursor-pointer",
+      selectedService === id && 'border-black'
+    )}
+      onClick={() => setSelectedService?.(id)}
     >
       <div className="flex justify-between items-center">
-        <h3 className="font-bold text-black">{title}</h3>
+        <h3 className="font-bold text-black">{serviceName}</h3>
         <button className={cn(
           "flex gap-2 text-sm text-gray-600 border border-gray100 rounded-full px-3 py-2",
-          selectedCard.includes(title) && 'bg-[rgba(0,00,0.99)] text-white'
-          )} onClick={handleSelectCard}>
-          {selectedCard.includes(title) ? 'Selected' : 'Select'}
-          {selectedCard.includes(title) &&
-          <div className="relative overflow-hidden w-5 h-5">
+          selectedServices.includes(id) && 'bg-[rgba(0,00,0.99)] text-white'
+        )} onClick={handleSelectCard}>
+          {selectedServices.includes(id) ? 'Selected' : 'Select'}
+          {selectedServices.includes(id) &&
+            <div className="relative overflow-hidden w-5 h-5">
               <Image
                 src={CheckedIcon}
                 alt="Car"
@@ -46,10 +53,10 @@ export function ServiceCard({ title, price, originalPrice }: ServiceCardProps) {
       </div>
       <div className="bg-zinc-900 rounded-lg p-4 flex items-center justify-between">
         <div className=" gap-1">
-          <div className="text-white text-xl font-bold">{price.toLocaleString()} <span className="text-white text-sm">SAR</span></div>
+          <div className="text-white text-xl font-bold">{priceAfter.toLocaleString()} <span className="text-white text-sm">SAR</span></div>
 
           <div className="text-white font-semibold text-sm ml-2 relative">
-            {originalPrice.toLocaleString()} <span className="text-xs">SAR</span>
+            {priceBefore.toLocaleString()} <span className="text-xs">SAR</span>
             <div className="border-t-2 border-[#FF3B30] absolute top-[10px] -left-1 w-[95%]"></div>
           </div>
         </div>
