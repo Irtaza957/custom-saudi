@@ -46,7 +46,7 @@ export default function Payment() {
       {/* Payment Details Section */}
       <div className="space-y-6">
         <h2 className="text-lg font-semibold">Enter Payment Details</h2>
-        <RadioGroup defaultValue="card" className="space-y-4">
+        <RadioGroup defaultValue="card" className="space-y-1.5 md:space-y-4">
           {/* Credit/Debit Card Option */}
           <div className="flex items-center space-x-2 border rounded-lg p-4 bg-white">
             <RadioGroupItem value="card" id="card" />

@@ -1,6 +1,6 @@
 export function OrderSummary() {
     return (
-      <div className="p-8 bg-white w-full md:h-screen mt-5 md:mt-0">
+      <div className="p-5 md:p-8 bg-white w-full md:h-screen mt-4 mb-24 md:mt-0">
         <h2 className="text-lg font-semibold mb-6">Order Summary</h2>
         
         <div className="space-y-4">

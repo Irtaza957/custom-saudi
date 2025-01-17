@@ -13,17 +13,11 @@ export function Footer() {
       router.push('payment')
     } else if (pathname .includes('/booking')) {
       router.push('booking/slot')
-    } else {
-      router.push('booking')
     }
   }
 
   const handleBack = () => {
-    if (pathname.includes('/booking/slot')) {
-      router.push('booking')
-    } else if (pathname.includes('/booking/payment')) {
-      router.push('slot')
-    }
+    router.back()
   }
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
@@ -40,44 +34,43 @@ export function Footer() {
           <div className='flex items-center gap-1'>
             <div className={cn(
               'border border-white rounded-full p-1.5',
-              pathname === '/booking' && 'border-black',
-              pathname !== '/booking' && 'bg-black'
+              pathname.includes('/booking') && 'border-black',
+              pathname.includes('/booking/') && 'bg-black'
             )}>
               <Bolt className={cn(
                 'w-[14px] h-[14px]',
-                pathname !== '/booking' && 'text-white'
+                pathname.includes('/booking/') && 'text-white'
               )} />
             </div>
             <div className='border-t border-gray100 w-5' />
             <div className={cn(
               'border rounded-full p-1.5',
-              pathname === '/booking/slot' && 'border-black',
-              pathname === '/booking' && 'border-white',
-              pathname === '/booking/payment' && 'bg-black',
+              pathname.includes('/booking/slot') && 'border-black',
+              pathname.includes('/booking/payment') && 'bg-black',
               )}>
               <CalendarDays className={cn(
                 'w-[14px] h-[14px]',
-                pathname === '/booking/slot' && 'text-black',
-                pathname === '/booking' && 'text-gray100',
-                pathname === '/booking/payment' && 'text-white'
+                pathname.includes('/booking/slot') && 'text-black',
+                pathname.includes('/booking') && !pathname.includes('/booking/slot') && 'text-gray100',
+                pathname.includes('/booking/payment') && 'text-white'
               )} />
             </div>
             <div className='border-t border-gray100 w-5' />
             <div className={cn(
-              'border border-white rounded-full p-1.5',
-              pathname === '/booking/payment' && 'border-black',
+              'border rounded-full p-1.5',
+              pathname.includes('/booking/payment') && 'border-black',
               )}>
               <CreditCard className={cn(
                 'w-[14px] h-[14px] text-gray100',
-                pathname === '/booking/payment' && 'text-black',
+                pathname.includes('/booking/payment') && 'text-black',
               )} />
             </div>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="text-sm font-medium"><span className='font-semibold'>250</span> SAR</span>
-          <Button onClick={handleNext} className="bg-zinc-900 text-white font-semibold text-sm hover:bg-zinc-800">
+          <span className="text-sm font-medium text-[#585858]"><span className='font-semibold'>250</span> SAR</span>
+          <Button onClick={handleNext} className="md:bg-zinc-900 text-zinc-900 md:text-white font-bold text-sm hover:bg-zinc-800">
             NEXT
             <ArrowDownToLine className="ml-2 h-4 w-4" />
           </Button>

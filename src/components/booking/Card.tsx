@@ -27,7 +27,7 @@ export function ServiceCard({ title, price, originalPrice }: ServiceCardProps) {
     )} 
     >
       <div className="flex justify-between items-center">
-        <h3 className="font-bold">{title}</h3>
+        <h3 className="font-bold text-black">{title}</h3>
         <button className={cn(
           "flex gap-2 text-sm text-gray-600 border border-gray100 rounded-full px-3 py-2",
           selectedCard.includes(title) && 'bg-[rgba(0,00,0.99)] text-white'
