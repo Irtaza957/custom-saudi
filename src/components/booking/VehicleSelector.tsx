@@ -8,16 +8,23 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/UI/Dropdown'
+import { RootState } from '@/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCarType } from '@/store/slices/booking'
 
 const vehicles = ['SEDAN', 'SUV']
 
 export function VehicleSelector() {
-  const [selected, setSelected] = React.useState(vehicles[0])
+  const carType = useSelector((state: RootState) => state.booking.carType);
+  const dispatch=useDispatch()
 
+  const handleSelect=(value: string)=>{
+    dispatch(setCarType(value))
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2 text-sm hover:text-gray-300 transition-colors">
-        {selected}
+        {carType}
         <ChevronDown className="h-4 w-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent 
@@ -26,7 +33,7 @@ export function VehicleSelector() {
         {vehicles.map((vehicle) => (
           <DropdownMenuItem
             key={vehicle}
-            onClick={() => setSelected(vehicle)}
+            onClick={() => handleSelect(vehicle)}
             className="text-sm text-white hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer"
           >
             {vehicle}

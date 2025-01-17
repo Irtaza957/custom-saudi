@@ -7,19 +7,24 @@ import Image from 'next/image'
 import { useState } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/UI/Dropdown'
 import { ChevronDown } from 'lucide-react'
+import { useSelector } from 'react-redux'
 
+import { RootState } from '@/store'
+import { useDispatch } from 'react-redux'
+import { setServiceType } from '@/store/slices/booking'
 export default function Home() {
-  const [selectedTab, setSelectedTab] = useState('POLISH')
   const [activeSlide, setActiveSlide] = useState(0);
   const router = useRouter();
   const pathname = usePathname();
   const [selectedLang, setSelectedLang] = useState(pathname?.split('/')?.[1])
-  console.log(pathname?.split('/'), 'pathnamepathname')
+  const serviceType = useSelector((state: RootState) => state.booking.serviceType);
+  const dispatch=useDispatch()
   const t = useTranslations()
+  const locale=useLocale()
   const services = [
     { title: 'Bright Polishing', price: 10600, originalPrice: 12000 },
     { title: 'Detailgio Full Polishing', price: 10600, originalPrice: 12000 },
@@ -27,7 +32,7 @@ export default function Home() {
   ]
 
   const handleSelectTab = (value: string) => {
-    setSelectedTab(value)
+    dispatch(setServiceType(value))
   }
 
   const handleSlideChange = (index: number) => {
@@ -107,12 +112,12 @@ export default function Home() {
           {/* Service Selection */}
           <div className="space-y-6 w-full h-full lg:max-w-[35%] px-4 lg:px-0 flex flex-col">
             {/* Tabs */}
-            <div className="flex gap-4 border-b border-gray-200 bg-[rgba(0,00,0.99)] rounded-lg overflow-auto whitespace-nowrap w-[calc(100%-2px)] no-scrollbar">
+            <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="flex gap-4 border-b border-gray-200 bg-[rgba(0,00,0.99)] rounded-lg overflow-auto whitespace-nowrap w-[calc(100%-2px)] no-scrollbar">
               {['POLISH', 'THERMAL TINT', 'PROTECTION FILM', 'NANO CERAMIC'].map((tab) => (
                 <button
                   key={tab}
                   className={`px-4 py-2 text-sm hover:bg-[rgba(104,104,104,0.50)] capitalize hover:text-white rounded-lg transition-all 
-                    ${tab === selectedTab
+                    ${tab === serviceType
                       ? 'text-white font-semibold bg-[rgba(104,104,104,0.50)]'
                       : 'text-gray200 hover:text-gray-700'
                     }`}
@@ -124,8 +129,8 @@ export default function Home() {
             </div>
 
             {/* Service Cards */}
-            <div className='flex-1 overflow-y-auto no-scrollbar space-y-2'>
-              <div className="hidden flex-1 lg:block gap-2 space-y-2">
+            <div className='hidden lg:block overflow-y-auto no-scrollbar lg:h-[calc(100vh-170px)] space-y-2'>
+              <div className="flex-1 gap-2 space-y-2">
                 {services.map((service) => (
                   <ServiceCard key={service.title} {...service} />
                 ))}

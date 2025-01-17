@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import StoreProvider from "@/providers/StoreProvider";
 
 // Import the Roboto font
 const roboto = Roboto({
@@ -31,7 +32,9 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <NextIntlClientProvider messages={messages}>
+          <StoreProvider>
           {children}
+          </StoreProvider>
         </NextIntlClientProvider>
       </body>
     </html>
