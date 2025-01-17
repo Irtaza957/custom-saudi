@@ -17,6 +17,7 @@ import { RootState } from '@/store'
 import { useDispatch } from 'react-redux'
 import { setServiceType } from '@/store/slices/booking'
 import { services } from '@/libs/utils/constants'
+
 export default function Home() {
   const router = useRouter();
   const pathname = usePathname();
