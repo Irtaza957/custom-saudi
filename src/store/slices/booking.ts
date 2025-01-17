@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface BookingState {
-  carType: string
-  serviceType: string
-  selectedServices: number[]
+  carType: string;
+  serviceType: string;
+  selectedServices: number[];
   slot: {
-    date: Date
-    time: string
-  }
+    date: string; // Store as an ISO string
+    time: string;
+  };
 }
 
 const initialState: BookingState = {
-  carType: 'SEDAN',
-  serviceType: 'POLISHING',
+  carType: "SEDAN",
+  serviceType: "POLISHING",
   selectedServices: [],
   slot: {
-    date: new Date(),
-    time: '12:00 PM'
-  }
+    date: new Date().toISOString(), // Store as a string
+    time: "12:00 PM",
+  },
 };
 
 const bookingSlice = createSlice({
@@ -34,10 +34,14 @@ const bookingSlice = createSlice({
       state.selectedServices = action.payload;
     },
     setSlot: (state, action) => {
-      state.slot = action.payload;
-    }
+      state.slot = {
+        ...state.slot,
+        ...action.payload,
+      };
+    },
   },
 });
 
-export const { setCarType, setServiceType, setSelectedServices, setSlot } = bookingSlice.actions;
+export const { setCarType, setServiceType, setSelectedServices, setSlot } =
+  bookingSlice.actions;
 export default bookingSlice.reducer;

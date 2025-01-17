@@ -30,6 +30,7 @@ export default async function RootLayout({
       <body
         className={`${roboto.variable}`} // Use the Roboto variable
         suppressHydrationWarning
+        suppressContentEditableWarning
       >
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>

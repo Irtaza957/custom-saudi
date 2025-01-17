@@ -33,7 +33,7 @@ export function OrderSummary() {
           <div className="pt-6 border-t space-y-6">
             <div className="flex justify-between">
               <p className="text-sm text-gray-600 mb-2">Date</p>
-              <p className="font-medium">{slot.date.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} {slot.time}</p>
+              <p className="font-medium">{new Date(slot.date).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} {slot.time}</p>
             </div>
   
             <div className="space-y-3">
