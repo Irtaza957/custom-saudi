@@ -75,7 +75,7 @@ export function OrderSummary() {
               onChange={handleVoucherCode}
               onKeyDown={handleKeyPress}
             />
-            <Button onClick={handleApplyVoucher} className={`text-sm font-bold absolute md:top-[1px] ${locale === 'ar' ? 'left-[1px]' : 'right-[1px]'}`}>{t('Apply')}</Button>
+            <Button onClick={handleApplyVoucher} className={`text-sm font-bold absolute top-[1px] ${locale === 'ar' ? 'left-[1px]' : 'right-[1px]'}`}>{t('Apply')}</Button>
           </div>
 
           <div className="flex justify-between mt-4 border-b pb-2">

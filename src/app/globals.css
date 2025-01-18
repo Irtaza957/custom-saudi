@@ -87,3 +87,27 @@ body {
   border-radius: 5px;
   color: black;
 }
+
+.carousel .control-prev.control-arrow::before {
+  border-right: 8px solid #292526 !important;
+  fill: #292526 !important;
+}
+
+.carousel .control-prev.control-arrow::after {
+  border-right: 8px solid #292526 !important;
+  fill: #292526 !important;
+}
+
+.carousel .control-next.control-arrow::before {
+  border-left: 8px solid #292526 !important;
+  fill: #292526 !important;
+}
+
+.carousel .control-next.control-arrow::after {
+  border-left: 8px solid #292526 !important;
+  fill: #292526 !important;
+}
+
+.carousel .slide {
+  padding-right: 6px; /* Adjust the padding between slides */
+}

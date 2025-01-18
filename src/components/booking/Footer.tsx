@@ -59,7 +59,7 @@ export function Footer() {
   }, [selectedServices])
 
   return (
-    <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
+    <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="fixed bottom-0 left-0 right-0 z-10 bg-white border-t border-gray-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
           <Button
@@ -115,7 +115,7 @@ export function Footer() {
           <Button 
             dir={locale === 'ar' ? 'rtl' : 'ltr'} 
             onClick={handleNext} 
-            className="md:bg-zinc-900 text-zinc-900 md:text-white font-bold text-sm hover:bg-zinc-800 flex gap-1"
+            className="md:bg-zinc-900 text-zinc-900 md:text-white font-bold text-sm hover:bg-zinc-800 flex gap-1 md:hover:text-white"
             disabled={!totalPrice}
           >
             {t('NEXT')}

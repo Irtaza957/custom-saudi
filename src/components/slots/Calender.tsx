@@ -69,7 +69,7 @@ export function Calendar() {
           showOutsideDays
           classNames={{
             caption_label: "hidden",
-            nav: `space-x-1 flex items-center absolute -top-10 ${locale === 'ar' ? 'left-0 flex flex-row-reverse' : 'right-0'}`,
+            nav: `space-x-1 flex items-center gap-3 absolute -top-10 ${locale === 'ar' ? 'left-0 flex flex-row-reverse' : 'right-0'}`,
           }}
           components={{
             PreviousMonthButton: () => (

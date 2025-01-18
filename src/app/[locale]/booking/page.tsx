@@ -25,10 +25,10 @@ export default function Home() {
   const [selectedService, setSelectedService] = useState<number | null>(null)
   const [selectedLang, setSelectedLang] = useState(pathname?.split('/')?.[1])
   const serviceType = useSelector((state: RootState) => state.booking.serviceType);
-  const carType=useSelector((state:RootState)=>state.booking.carType)
-  const dispatch=useDispatch()
+  const carType = useSelector((state: RootState) => state.booking.carType)
+  const dispatch = useDispatch()
   const t = useTranslations()
-  const locale=useLocale()
+  const locale = useLocale()
 
   const handleSelectTab = (value: string) => {
     dispatch(setServiceType(value))
@@ -41,7 +41,7 @@ export default function Home() {
   const handleLanguageChange = (locale: string) => {
     setSelectedLang(locale);
     const segments = pathname.split('/').filter(Boolean);
-  
+
     // Handle locale at the first segment
     if (['en', 'ar'].includes(segments[0])) {
       segments[0] = locale;
@@ -57,9 +57,9 @@ export default function Home() {
     }, 1000)
   };
 
-  const servicesData=useMemo(()=>{
-    return services.filter((service)=>service.carType===carType && service.serviceType.toUpperCase()===serviceType.toUpperCase())
-  },[carType,serviceType])
+  const servicesData = useMemo(() => {
+    return services.filter((service) => service.carType === carType && service.serviceType.toUpperCase() === serviceType.toUpperCase())
+  }, [carType, serviceType])
 
   return (
     <div className='size-full'>
@@ -111,7 +111,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Service Selection */} 
+          {/* Service Selection */}
           <div className="space-y-6 w-full h-full lg:max-w-[35%] px-4 lg:px-0 flex flex-col">
             {/* Tabs */}
             <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="flex gap-4 border-b border-gray-200 bg-[rgba(0,00,0.99)] rounded-lg overflow-auto whitespace-nowrap w-[calc(100%-2px)] no-scrollbar">
@@ -142,6 +142,8 @@ export default function Home() {
               <Carousel
                 onChange={handleSlideChange}
                 showArrows={true}
+                centerMode={true} // Enables the "peek" effect
+                centerSlidePercentage={80}
               >
                 {servicesData.map((service) => (
                   <ServiceCard key={service.id} {...service} />
