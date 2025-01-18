@@ -3,11 +3,13 @@
 import { cn } from "@/libs/utils"
 import { RootState } from "@/store"
 import { setSlot } from "@/store/slices/booking"
+import { useTranslations } from "next-intl"
 import { useDispatch, useSelector } from "react-redux"
 
 const MORNING_SLOTS = ["12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM"]
 
 export function TimeSlots() {
+    const t = useTranslations()
     const {slot} = useSelector((state:RootState)=>state.booking)
     const dispatch = useDispatch()
     const handleSelectTime = (time:string) => {
@@ -30,7 +32,7 @@ export function TimeSlots() {
                                             : "border-gray-200 hover:border-gray-300 text-gray-700"
                                     )}
                                 >
-                                    {time}
+                                    {t(time)}
                                 </button>
                             </div>
                         ))}

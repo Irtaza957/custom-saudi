@@ -7,8 +7,10 @@ import 'react-day-picker/style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { setSlot } from '@/store/slices/booking';
+import { useLocale } from 'next-intl';
 
 export function Calendar() {
+  const locale=useLocale()
   const [selectedMonthYear, setSelectedMonthYear] = useState<Date>(new Date());
   const { slot } = useSelector((state: RootState) => state.booking);
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ export function Calendar() {
               year: 'numeric',
             })}
           </span>
-          <span className="ml-2 text-black500 text-sm font-semibold">
+          <span dir={locale === 'ar' ? 'rtl' : 'ltr'} className="ml-2 text-black500 text-sm font-semibold">
             {new Date(slot.date).toLocaleDateString('en-US', {
               weekday: 'short',
               day: 'numeric',
@@ -63,7 +65,7 @@ export function Calendar() {
           showOutsideDays
           classNames={{
             caption_label: "hidden",
-            nav: "space-x-1 flex items-center absolute -top-10 right-0",
+            nav: `space-x-1 flex items-center absolute -top-10 ${locale === 'ar' ? 'left-0 flex flex-row-reverse' : 'right-0'}`,
           }}
           components={{
             PreviousMonthButton: () => (

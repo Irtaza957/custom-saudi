@@ -1,12 +1,57 @@
-import Payment from "@/components/payment/Payment"
-import { OrderSummary } from "@/components/slots/OrderSummary"
+import Payment from "@/components/payment/Payment";
+import { OrderSummary } from "@/components/slots/OrderSummary";
+import { useLocale, useTranslations } from "next-intl";
+import { Input } from "@/components/UI/Input";
+import { cn } from "@/libs/utils";
 
 export default function PaymentForm() {
-  return (
-    <div className="flex flex-col md:flex-row justify-between w-full md:h-screen">
-      <Payment/>
-      <div className="px-6 md:px-0 w-full md:w-[32%]"><OrderSummary/></div>
-    </div>
-  )
-}
+  const t = useTranslations();
+  const locale = useLocale();
 
+  return (
+    <div className="size-full grid grid-cols-1 md:grid-cols-12 md:max-h-screen md:overflow-hidden">
+      <div className="space-y-6 pt-6 px-6 md:col-span-8">
+        <h2 className="text-lg font-semibold text-black">
+          {t("Enter Your Data")}
+        </h2>
+        <div className="space-y-4">
+          <div>
+            <Input
+              type="text"
+              placeholder={t("Full Name")}
+              className="w-full bg-white"
+            />
+          </div>
+          <div className="flex gap-4">
+            <Input
+              type="tel"
+              placeholder={t("Phone Number")}
+              className={cn("w-full bg-white", locale === "ar" && "text-right")}
+            />
+            {/* <Button 
+              className="bg-black text-white hover:bg-black/90 text-xs px-4"
+            >
+              VERIFY NUMBER
+            </Button> */}
+          </div>
+          {/* <div className="flex gap-2">
+            {[1,2,3,4].map((num) => (
+              <Input 
+                key={num}
+                type="text" 
+                className="w-14 h-14 text-center bg-gray-50"
+                maxLength={1}
+              />
+            ))}
+          </div> */}
+        </div>
+      </div>
+      <div className="px-6 md:px-0 w-full md:col-span-4 md:row-span-3">
+        <OrderSummary />
+      </div>
+      <div className="md:col-span-8">
+      <Payment />
+      </div>
+    </div>
+  );
+}

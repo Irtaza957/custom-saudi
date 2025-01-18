@@ -3,8 +3,10 @@
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/libs/utils'
+import { useTranslations } from 'next-intl'
 
 export function NavMenu() {
+  const t = useTranslations()
   const [isOpen, setIsOpen] = useState(false)
 
   const menuItems = ['HOME', 'SERVICES', 'ABOUT US', 'CONTACT']
@@ -42,7 +44,7 @@ export function NavMenu() {
               href="#"
               className="text-white text-sm hover:text-gray-300 transition-colors"
             >
-              {item}
+              {t(item)}
             </a>
           ))}
         </nav>

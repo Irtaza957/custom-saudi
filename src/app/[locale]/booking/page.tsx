@@ -69,7 +69,7 @@ export default function Home() {
           {/* Car Image */}
           <div className='w-full'>
             <header className="bg-zinc-900 text-white p-4 lg:rounded-lg w-full lg:w-[50%]">
-              <div className="container mx-auto flex justify-between items-center">
+              <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center gap-7">
                   <span className="font-bold text-lg">CUSTOM</span>
                   <div className='flex gap-3'>
@@ -111,7 +111,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Service Selection */}
+          {/* Service Selection */} 
           <div className="space-y-6 w-full h-full lg:max-w-[35%] px-4 lg:px-0 flex flex-col">
             {/* Tabs */}
             <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="flex gap-4 border-b border-gray-200 bg-[rgba(0,00,0.99)] rounded-lg overflow-auto whitespace-nowrap w-[calc(100%-2px)] no-scrollbar">

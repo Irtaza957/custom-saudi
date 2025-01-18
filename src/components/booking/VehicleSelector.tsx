@@ -11,12 +11,14 @@ import {
 import { RootState } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCarType } from '@/store/slices/booking'
+import { useTranslations } from 'next-intl'
 
 const vehicles = ['SEDAN', 'SUV']
 
 export function VehicleSelector() {
   const carType = useSelector((state: RootState) => state.booking.carType);
   const dispatch=useDispatch()
+  const t = useTranslations()
 
   const handleSelect=(value: string)=>{
     dispatch(setCarType(value))
@@ -24,7 +26,7 @@ export function VehicleSelector() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2 text-sm hover:text-gray-300 transition-colors">
-        {carType}
+        {t(carType)}  
         <ChevronDown className="h-4 w-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent 
@@ -36,7 +38,7 @@ export function VehicleSelector() {
             onClick={() => handleSelect(vehicle)}
             className="text-sm text-white hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer"
           >
-            {vehicle}
+            {t(vehicle)}  
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

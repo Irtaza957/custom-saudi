@@ -67,7 +67,7 @@ export const services = [
     id: 9,
     carType: "SEDAN",
     serviceType: "Nano Ceramic",
-    serviceName: "Full Nano Ceramic",
+    serviceName: "Full Nano Cermaic",
     priceBefore: 1990,
     priceAfter: 1590,
   },

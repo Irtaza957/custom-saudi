@@ -1,15 +1,21 @@
 import { notFound } from 'next/navigation';
 import { getRequestConfig } from 'next-intl/server';
 
-// Can be imported from a shared config
 const locales = ['en', 'ar'];
 
 export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as string)) notFound();
+  if (!locale || !locales.includes(locale)) {
+    console.error('Invalid locale:', locale);
+    notFound();
+  }
 
-  return {
-    locale, // Explicitly return the locale
-    messages: (await import(`../locale/${locale}.json`)).default,
-  };
+  try {
+    return {
+      locale,
+      messages: (await import(`../locale/${locale}.json`)).default,
+    };
+  } catch (error) {
+    console.error('Error loading locale messages:', error);
+    notFound();
+  }
 });
