@@ -10,8 +10,8 @@ export default function PaymentForm() {
 
   return (
     <div className="size-full grid grid-cols-1 md:grid-cols-12 md:max-h-screen md:overflow-hidden">
-      <div className="space-y-6 pt-6 px-6 md:col-span-8">
-        <h2 className="text-lg font-semibold text-black">
+      <div className="space-y-6 pt-8 px-4 md:px-10 md:col-span-8">
+        <h2 className={`text-lg font-semibold text-black ${locale==='ar' ? 'text-right' : ''}`}>
           {t("Enter Your Data")}
         </h2>
         <div className="space-y-4">
@@ -19,7 +19,7 @@ export default function PaymentForm() {
             <Input
               type="text"
               placeholder={t("Full Name")}
-              className="w-full bg-white"
+              className={cn("w-full bg-white", locale === "ar" && "text-right")}
             />
           </div>
           <div className="flex gap-4">
@@ -46,10 +46,10 @@ export default function PaymentForm() {
           </div> */}
         </div>
       </div>
-      <div className="px-6 md:px-0 w-full md:col-span-4 md:row-span-3">
+      <div className="w-full md:col-span-4 md:row-span-3 px-4">
         <OrderSummary />
       </div>
-      <div className="md:col-span-8">
+      <div className="md:col-span-8 md:px-4 mb-20 md:mb-0">
       <Payment />
       </div>
     </div>

@@ -19,7 +19,10 @@ export function Footer() {
   const handleNext = () => {
     if (pathname.includes('/booking/slot')) {
       router.push('payment')
-    } else if (pathname.includes('/booking')) {
+    } else if (pathname.includes('/booking/payment')) {
+      return
+    }
+    else{
       router.push('booking/slot')
     }
   }
@@ -86,7 +89,7 @@ export function Footer() {
         </div>
 
         <div className="flex items-center gap-4">
-          {totalPrice ? <span className="text-sm font-medium text-[#060606]"><span className='font-semibold'>{totalPrice}</span> SAR</span> : null}
+          {totalPrice ? <span className="text-sm font-medium text-[#060606]"><span className='font-semibold'>{totalPrice}</span> {t('SAR')}</span> : null}
           <Button dir={locale === 'ar' ? 'rtl' : 'ltr'} onClick={handleNext} className="md:bg-zinc-900 text-zinc-900 md:text-white font-bold text-sm hover:bg-zinc-800 flex gap-1">
             {t('NEXT')}
             <ArrowDownToLine className="ml-2 h-4 w-4" />

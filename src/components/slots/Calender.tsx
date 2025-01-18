@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { setSlot } from '@/store/slices/booking';
 import { useLocale } from 'next-intl';
+import { cn } from '@/libs/utils';
 
 export function Calendar() {
   const locale=useLocale()
@@ -45,7 +46,10 @@ export function Calendar() {
               year: 'numeric',
             })}
           </span>
-          <span dir={locale === 'ar' ? 'rtl' : 'ltr'} className="ml-2 text-black500 text-sm font-semibold">
+          <span dir={locale === 'ar' ? 'rtl' : 'ltr'} className={cn(
+            "text-black500 text-sm font-semibold",
+            locale === 'ar' ? 'mr-2' : 'ml-2'
+            )}>
             {new Date(slot.date).toLocaleDateString('en-US', {
               weekday: 'short',
               day: 'numeric',
@@ -55,7 +59,7 @@ export function Calendar() {
         </h2>
       </div>
 
-      <div className="relative dayPicker">
+      <div dir='rtl' className="relative dayPicker">
         <DayPicker
           mode="single"
           month={selectedMonthYear} // Sync the displayed month with the state

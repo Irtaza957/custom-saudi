@@ -8,7 +8,7 @@ export default function Payment() {
   const t = useTranslations();
   const locale=useLocale();
   return (
-    <div dir={locale === 'ar' ? 'rtl' : 'ltr'}  className="mx-auto px-6 pt-6 md:p-6 space-y-8 md:h-full no-scrollbar overflow-auto">
+    <div dir={locale === 'ar' ? 'rtl' : 'ltr'}  className="mx-auto px-4 md:px-6 pt-6 md:p-6 space-y-8 md:h-[calc(100vh-260px)] no-scrollbar overflow-auto">
       {/* Data Entry Section */}
 
       {/* Payment Details Section */}
@@ -17,28 +17,28 @@ export default function Payment() {
         <RadioGroup dir={locale === 'ar' ? 'rtl' : 'ltr'} defaultValue="card" className="space-y-1.5 md:space-y-4">
           {/* Credit/Debit Card Option */}
           <div className="flex items-center space-x-2 border rounded-lg p-4 bg-white">
-            <RadioGroupItem value="card" id="card" />
+            <RadioGroupItem value="card" id="card" className={locale === 'ar' ? "ml-3" : ''} />
             <Label htmlFor="card" className="flex justify-between items-center w-full">
               <span>{t('Pay with Debit/Credit Card')}</span>
               <div className="flex gap-1">
                 <Image 
                   src={Mada} 
                   alt="Credit Card Logos"
-                  width={120}
+                  // width={120}
                   height={24}
                   className="h-6 object-contain"
                 />
                 <Image 
                   src={Visa} 
                   alt="Credit Card Logos"
-                  width={120}
+                  // width={120}
                   height={24}
                   className="h-6 object-contain"
                 />
                 <Image 
                   src={Mastercard} 
                   alt="Credit Card Logos"
-                  width={120}
+                  // width={120}
                   height={24}
                   className="h-6 object-contain"
                 />
@@ -48,14 +48,14 @@ export default function Payment() {
 
           {/* Tamara Option */}
           <div className="flex items-start space-x-2 border rounded-lg p-4 bg-white">
-            <RadioGroupItem value="tamara" id="tamara" className="mt-1" />
+            <RadioGroupItem value="tamara" id="tamara" className={`mt-1 ${locale === 'ar' ? "ml-3" : ''}`} />
             <Label htmlFor="tamara" className="flex flex-col w-full">
               <div className="flex justify-between items-center w-full">
                 <span>{t('Pay with Tamara')}</span>
                 <Image 
                   src={Tabby}
                   alt="Tamara Logo"
-                  width={80}
+                  // width={80}
                   height={24}
                   className="h-6 object-contain"
                 />
@@ -68,14 +68,14 @@ export default function Payment() {
 
           {/* Tabby Option */}
           <div className="flex items-start space-x-2 border rounded-lg p-4 bg-white">
-            <RadioGroupItem value="tabby" id="tabby" className="mt-1" />
+            <RadioGroupItem value="tabby" id="tabby" className={`mt-1 ${locale === 'ar' ? "ml-3" : ''}`}  />
             <Label htmlFor="tabby" className="flex flex-col w-full">
               <div className="flex justify-between items-center w-full">
                 <span>{t('Pay with Tabby')}</span>
                 <Image 
                   src={Tamara}
                   alt="Tabby Logo"
-                  width={80}
+                  // width={80}
                   height={24}
                   className="h-6 object-contain"
                 />
@@ -88,7 +88,7 @@ export default function Payment() {
 
           {/* Pay on Site Option */}
           <div className="flex items-center space-x-2 border rounded-lg p-4 bg-white">
-            <RadioGroupItem value="onsite" id="onsite" />
+            <RadioGroupItem value="onsite" id="onsite" className={locale === 'ar' ? "ml-3" : ''}  />
             <Label htmlFor="onsite" className="flex justify-between items-center w-full">
               <span>{t('Pay on Site')}</span>
               <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
