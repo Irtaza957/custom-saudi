@@ -177,3 +177,22 @@ export const services = [
   },
 ];
 
+export const API_ROUTES = {
+  BASE_URL: process.env.NEXT_PUBLIC_API_URL,
+  createBooking: '/api/v1/bookings',
+};
+
+export const voucherCodes = [
+  {
+    name: 'Voucher 1',
+    type: 'percentage',
+    value: 10,
+    code: 'VOUCHER10'
+  },
+  {
+    name: 'Voucher 2',
+    type: 'fixed',
+    value: 15,
+    code: 'VOUCHER15'
+  },
+]

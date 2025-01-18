@@ -25,6 +25,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-responsive-carousel": "^3.2.23",
+    "react-toastify": "^11.0.3",
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {

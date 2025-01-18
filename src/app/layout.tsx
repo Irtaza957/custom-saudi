@@ -4,6 +4,8 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import StoreProvider from "@/providers/StoreProvider";
+import { Bounce, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Import the Roboto font
 const roboto = Roboto({
@@ -34,6 +36,19 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+          />
           {children}
           </StoreProvider>
         </NextIntlClientProvider>

@@ -6,6 +6,9 @@ import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
 import { Button } from "@/components/UI/Button"
 import { SedanImg, SUVImg } from '@/assets'
 import Image, { StaticImageData } from 'next/image'
+import { useRouter } from 'next/navigation'
+import { setCarType } from '@/store/slices/booking'
+import { useDispatch } from 'react-redux'
 
 interface CarType {
     name: string;
@@ -24,9 +27,12 @@ const carTypes: CarType[] = [
 ]
 
 export default function CarSelector() {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: 'start' })
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' })
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
     const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(0) 
+    const router = useRouter()
+    const dispatch = useDispatch()
 
     const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
     const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
@@ -34,6 +40,7 @@ export default function CarSelector() {
     const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
         setPrevBtnEnabled(emblaApi.canScrollPrev())
         setNextBtnEnabled(emblaApi.canScrollNext())
+        setSelectedIndex(emblaApi.selectedScrollSnap()) 
     }, [])
 
     useEffect(() => {
@@ -44,6 +51,10 @@ export default function CarSelector() {
         emblaApi.on('reInit', onSelect)
     }, [emblaApi, onSelect])
 
+    const handleNavigate = () => {
+        dispatch(setCarType(carTypes[selectedIndex].name))
+        router.push('/booking')
+    }
     return (
         <div className="w-full">
             <h1 className="text-center font-bold text-2xl mb-8">SELECT CAR TYPE</h1>
@@ -72,14 +83,14 @@ export default function CarSelector() {
                             </div>
                         ))}
                     </div>
-                    <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2">
+                    <div className="absolute bottom-4 left-4 z-20 flex items-center gap-2" onClick={handleNavigate}>
                         <div className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center">
                             <ChevronRight className="w-5 h-5" />
                         </div>
                         {/* <span className="text-[80px] font-bold text-[#f1f1f1] opacity-20 absolute -left-4 -z-10">
                       {car.name}
                     </span> */}
-                        <span className="text-2xl font-bold">Sedan</span>
+                        <span className="text-2xl font-bold">{carTypes[selectedIndex].name}</span>
                     </div>
                 </div>
 

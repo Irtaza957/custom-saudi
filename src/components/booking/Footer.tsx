@@ -8,19 +8,22 @@ import { RootState } from '@/store';
 import { services } from '@/libs/utils/constants';
 import { useMemo } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { useCreateBookingMutation } from '@/store/services/branches';
+import { toast } from 'react-toastify';
 
 export function Footer() {
+  const [createBooking] = useCreateBookingMutation()
   const pathname = usePathname()
   const router = useRouter()
   const locale=useLocale()
   const t = useTranslations()
-  const { selectedServices } = useSelector((state: RootState) => state.booking)
+  const { selectedServices, slot, carType, serviceType, paymentDetails } = useSelector((state: RootState) => state.booking)
 
   const handleNext = () => {
     if (pathname.includes('/booking/slot')) {
       router.push('payment')
     } else if (pathname.includes('/booking/payment')) {
-      return
+      handleCreateBooking()
     }
     else{
       router.push('booking/slot')
@@ -31,11 +34,30 @@ export function Footer() {
     router.back()
   }
 
+
+  const handleCreateBooking = async () => {
+    try {
+      const response = await createBooking({
+        services: selectedServices,
+        slot: slot,
+        carType: carType,
+        serviceType: serviceType,
+        paymentDetails: paymentDetails,
+      })
+      console.log(response)
+      toast.success(t('Booking created successfully'))
+    } catch (error) {
+      console.log(error)
+      toast.error(t('Booking failed! Something went wrong!'))
+    }
+  }
+
   const totalPrice = useMemo(() => {
     return services?.filter(item => selectedServices?.find(service => service === item.id))?.reduce((acc, curr) => {
       return acc + curr?.priceAfter
     }, 0)
   }, [selectedServices])
+
   return (
     <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -90,7 +112,12 @@ export function Footer() {
 
         <div className="flex items-center gap-4">
           {totalPrice ? <span className="text-sm font-medium text-[#060606]"><span className='font-semibold'>{totalPrice}</span> {t('SAR')}</span> : null}
-          <Button dir={locale === 'ar' ? 'rtl' : 'ltr'} onClick={handleNext} className="md:bg-zinc-900 text-zinc-900 md:text-white font-bold text-sm hover:bg-zinc-800 flex gap-1">
+          <Button 
+            dir={locale === 'ar' ? 'rtl' : 'ltr'} 
+            onClick={handleNext} 
+            className="md:bg-zinc-900 text-zinc-900 md:text-white font-bold text-sm hover:bg-zinc-800 flex gap-1"
+            disabled={!totalPrice}
+          >
             {t('NEXT')}
             <ArrowDownToLine className="ml-2 h-4 w-4" />
           </Button>

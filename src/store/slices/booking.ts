@@ -8,6 +8,13 @@ interface BookingState {
     date: string; // Store as an ISO string
     time: string;
   };
+  paymentDetails: {
+    name: string;
+    phone: string;
+    paymentMethod: string;
+  },
+  discount: number;
+  voucherCode: string;
 }
 
 const initialState: BookingState = {
@@ -18,6 +25,13 @@ const initialState: BookingState = {
     date: new Date().toISOString(), // Store as a string
     time: "12:00 PM",
   },
+  paymentDetails: {
+    name: "",
+    phone: "",
+    paymentMethod: "",
+  },
+  discount: 0,
+  voucherCode: "",
 };
 
 const bookingSlice = createSlice({
@@ -39,9 +53,21 @@ const bookingSlice = createSlice({
         ...action.payload,
       };
     },
+    setPaymentDetails: (state, action) => {
+      state.paymentDetails = {
+        ...state.paymentDetails,
+        ...action.payload,
+      };
+    },
+    setDiscount: (state, action) => {
+      state.discount = action.payload;
+    },
+    setVoucherCode: (state, action) => {
+      state.voucherCode = action.payload;
+    },
   },
 });
 
-export const { setCarType, setServiceType, setSelectedServices, setSlot } =
+export const { setCarType, setServiceType, setSelectedServices, setSlot, setPaymentDetails, setDiscount, setVoucherCode } =
   bookingSlice.actions;
 export default bookingSlice.reducer;
