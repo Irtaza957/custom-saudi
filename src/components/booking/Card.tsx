@@ -56,7 +56,7 @@ export function ServiceCard({ id, serviceName, priceAfter, priceBefore, selected
       </div>
       <div className="bg-zinc-900 rounded-lg p-4 flex flex-wrap items-center justify-between">
         <div className=" gap-1">
-          <div className="text-white text-xl font-bold">{priceAfter.toLocaleString()} <span className="text-white text-sm">{t('SAR')}</span></div>
+          <div className="text-white text-lg md:text-xl font-bold">{priceAfter.toLocaleString()} <span className="text-white text-xs md:text-sm">{t('SAR')}</span></div>
 
           <div className="text-white font-semibold text-sm ml-2 relative">
             {priceBefore.toLocaleString()} <span className="text-xs">{t('SAR')}</span>
@@ -65,7 +65,7 @@ export function ServiceCard({ id, serviceName, priceAfter, priceBefore, selected
         </div>
         <div className="flex items-center gap-1">
           <span className="text-xs text-white whitespace-nowrap">{t('Pay with')}</span>
-          <div className="relative w-16 h-16">
+          <div className="relative w-10 h-10 md:w-16 md:h-16">
             <Image
               src={Tabby}
               alt="Tabby"
@@ -73,7 +73,7 @@ export function ServiceCard({ id, serviceName, priceAfter, priceBefore, selected
               className="object-contain"
             />
           </div>
-          <div className="relative w-[84px] h-16">
+          <div className="relative w-[60px] h-[60px] md:w-[100px] md:h-[100px]">
             <Image
               src={Tamara}
               alt="Tamara"
