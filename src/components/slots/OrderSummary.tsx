@@ -55,7 +55,7 @@ export function OrderSummary() {
         {services?.filter(item => selectedServices?.find(service => service === item.id))?.map((item, index) => (
           <div className="flex justify-between items-start" key={index}>
             <div>
-              <h3 className="font-bold text-[15px]">{t(item?.serviceType)}</h3>
+              <h3 className="font-bold text-[15px] text-black">{t(item?.serviceType)}</h3>
               <p className="text-sm text-gray-500">{t(item?.serviceName)}</p>
             </div>
             <div className="flex items-baseline gap-1">
