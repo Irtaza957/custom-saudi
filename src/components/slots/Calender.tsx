@@ -1,13 +1,20 @@
 'use client'
 
-import { DayPicker } from 'react-day-picker'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useState } from "react"
-import "react-day-picker/style.css";
+import { DayPicker } from 'react-day-picker';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import 'react-day-picker/style.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import { setSlot } from '@/store/slices/booking';
+import { useLocale } from 'next-intl';
+import { cn } from '@/libs/utils';
 
 export function Calendar() {
-  const [selected, setSelected] = useState<Date>(new Date())
-  const [selectedMonthYear, setSelectedMonthYear] = useState<Date>(new Date())
+  const locale=useLocale()
+  const [selectedMonthYear, setSelectedMonthYear] = useState<Date>(new Date());
+  const { slot } = useSelector((state: RootState) => state.booking);
+  const dispatch = useDispatch();
 
   const handlePreviousMonth = () => {
     const previousMonth = new Date(
@@ -24,27 +31,45 @@ export function Calendar() {
     );
     setSelectedMonthYear(nextMonth);
   };
+
+  const handleSelectDate = (date: Date) => {
+    dispatch(setSlot({ date: date.toISOString() })); // Store as a string
+  };
+
   return (
-    <div className="p-6 bg-white w-full">
+    <div className="p-6 bg-white w-full rounded-tl-lg rounded-tr-lg lg:rounded-tl-lg lg:rounded-bl-lg">
       <div className="flex items-center justify-between mb-4 w-full">
         <h2 className="text-[15px] text-gray-900">
-          <span className="font-semibold text-black500 text-xl">{selectedMonthYear.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
-          <span className="ml-2 text-black500 text-sm font-semibold">
-            Wednesday, October 27
+          <span className="font-semibold text-black500 text-xl">
+            {selectedMonthYear.toLocaleDateString('en-US', {
+              month: 'long',
+              year: 'numeric',
+            })}
+          </span>
+          <span dir={locale === 'ar' ? 'rtl' : 'ltr'} className={cn(
+            "text-black500 text-sm font-semibold",
+            locale === 'ar' ? 'mr-2' : 'ml-2'
+            )}>
+            {new Date(slot.date).toLocaleDateString('en-US', {
+              weekday: 'short',
+              day: 'numeric',
+              month: 'long',
+            })}
           </span>
         </h2>
       </div>
 
-      <div className="relative dayPicker">
+      <div dir='rtl' className="relative dayPicker">
         <DayPicker
           mode="single"
-          selected={selected}
-          onSelect={(date) => date && setSelected(date)}
+          month={selectedMonthYear} // Sync the displayed month with the state
+          selected={new Date(slot.date)} // Convert back to Date
+          onSelect={(date) => date && handleSelectDate(date)}
           onMonthChange={(date) => date && setSelectedMonthYear(date)}
           showOutsideDays
           classNames={{
             caption_label: "hidden",
-            nav: "space-x-1 flex items-center absolute -top-10 right-0",
+            nav: `space-x-1 flex items-center gap-3 absolute -top-10 ${locale === 'ar' ? 'left-0 flex flex-row-reverse' : 'right-0'}`,
           }}
           components={{
             PreviousMonthButton: () => (
@@ -61,6 +86,5 @@ export function Calendar() {
         />
       </div>
     </div>
-  )
+  );
 }
-
