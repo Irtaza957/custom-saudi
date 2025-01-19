@@ -37,7 +37,7 @@ export function Calendar() {
   };
 
   return (
-    <div className="p-6 bg-white w-full rounded-tl-lg rounded-tr-lg lg:rounded-tl-lg lg:rounded-bl-lg">
+    <div className="p-3 lg:p-6 bg-white w-full rounded-tl-lg rounded-tr-lg lg:rounded-tl-lg lg:rounded-bl-lg">
       <div className="flex items-center justify-between mb-4 w-full">
         <h2 className="text-[15px] text-gray-900 flex flex-col sm:flex-row items-start sm:items-center">
           <span className="font-semibold text-black500 text-xl">

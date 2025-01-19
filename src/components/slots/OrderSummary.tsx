@@ -70,12 +70,12 @@ export function OrderSummary() {
             <Input
               type="text"
               placeholder={t("Enter Voucher Code")}
-              className={`w-full p-2.5 border rounded-lg text-sm outline-none bg-white ${locale === 'ar' ? 'pl-16' : 'pr-16'}`}
+              className={`w-full p-2.5 border rounded-lg text-sm text-black outline-none bg-white ${locale === 'ar' ? 'pl-16' : 'pr-16'}`}
               value={voucherCode}
               onChange={handleVoucherCode}
               onKeyDown={handleKeyPress}
             />
-            <Button onClick={handleApplyVoucher} className={`text-sm font-bold absolute top-[1px] ${locale === 'ar' ? 'left-[1px]' : 'right-[1px]'}`}>{t('Apply')}</Button>
+            <Button onClick={handleApplyVoucher} className={`text-sm font-bold absolute text-black top-[1px] ${locale === 'ar' ? 'left-[1px]' : 'right-[1px]'}`}>{t('Apply')}</Button>
           </div>
 
           <div className="flex justify-between mt-4 border-b pb-2">

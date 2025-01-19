@@ -77,7 +77,7 @@ export function Footer() {
           <div className='flex items-center gap-1'>
             <div className={cn(
               'border border-white rounded-full p-1.5',
-              pathname.includes('/booking') && 'border-black',
+              pathname.includes('/booking') && 'border-black text-black',
               pathname.includes('/booking/') && 'bg-black'
             )}>
               <Bolt className={cn(
