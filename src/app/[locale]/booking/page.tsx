@@ -64,7 +64,7 @@ export default function Home() {
                 <NavMenu />
               </div>
             </header>
-            <div className="relative overflow-hidden lg:w-[95%] h-[300px] md:h-[400px] lg:h-[500px] mb-5 lg:mb-0">
+            <div className="relative overflow-hidden lg:w-[95%] h-[200px] md:h-[400px] lg:h-[500px] mb-3 lg:mb-0">
               <Image
                 src={services?.find(item=>item.id===selectedService)?.gif || ''}
                 alt="Car"
@@ -94,7 +94,7 @@ export default function Home() {
             </div>
 
             {/* Service Cards */}
-            <div className='hidden lg:block overflow-y-auto no-scrollbar lg:h-[calc(100vh-170px)] space-y-2'>
+            <div className='hidden lg:block overflow-y-auto no-scrollbar lg:h-[calc(100vh-170px)] space-y-2 mb-20'>
               <div className="flex-1 gap-2 space-y-2">
                 {servicesData.map((service) => (
                   <ServiceCard key={service.id} selectedService={selectedService} setSelectedService={setSelectedService} {...service} />

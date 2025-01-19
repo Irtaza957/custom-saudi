@@ -111,3 +111,7 @@ body {
 .carousel .slide {
   padding-right: 6px; /* Adjust the padding between slides */
 }
+
+.rdp-day{
+  color: black;
+}

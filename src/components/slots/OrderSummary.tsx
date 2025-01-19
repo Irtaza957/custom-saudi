@@ -59,7 +59,7 @@ export function OrderSummary() {
               <p className="text-sm text-gray-500">{t(item?.serviceName)}</p>
             </div>
             <div className="flex items-baseline gap-1">
-              <span className="font-medium">{item?.priceAfter}</span>
+              <span className="font-medium text-black">{item?.priceAfter}</span>
               <span className="text-sm text-gray-500">{t('SAR')}</span>
             </div>
           </div>
@@ -70,7 +70,7 @@ export function OrderSummary() {
             <Input
               type="text"
               placeholder={t("Enter Voucher Code")}
-              className={`w-full p-2.5 border rounded-lg text-sm outline-none ${locale === 'ar' ? 'pl-16' : 'pr-16'}`}
+              className={`w-full p-2.5 border rounded-lg text-sm outline-none bg-white ${locale === 'ar' ? 'pl-16' : 'pr-16'}`}
               value={voucherCode}
               onChange={handleVoucherCode}
               onKeyDown={handleKeyPress}
@@ -80,28 +80,28 @@ export function OrderSummary() {
 
           <div className="flex justify-between mt-4 border-b pb-2">
             <p className="text-sm text-gray-600">{t('Date')}</p>
-            <p className="font-medium">{new Date(slot.date).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} {slot.time}</p>
+            <p className="font-medium text-black">{new Date(slot.date).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })} {slot.time}</p>
           </div>
 
           <div className="space-y-3 pt-3">
             <div className="flex justify-between text-sm border-b pb-2">
               <span className="text-gray-600">{t('Subtotal')}</span>
               <div className="flex items-baseline gap-1">
-                <span className="font-medium">{totalPrice - discount}</span>
+                <span className="font-medium text-black">{totalPrice - discount}</span>
                 <span className="text-gray-500">{t('SAR')}</span>
               </div>
             </div>
             <div className="flex justify-between text-sm border-b pb-2">
               <span className="text-gray-600">{t('Tax')}</span>
               <div className="flex items-baseline gap-1">
-                <span className="font-medium">50</span>
+                <span className="font-medium text-black">50</span>
                 <span className="text-gray-500">{t('SAR')}</span>
               </div>
             </div>
             <div className="flex justify-between text-[15px] pt-1">
-              <span className="font-medium">{t('Total')}</span>
+              <span className="font-medium text-black">{t('Total')}</span>
               <div className="flex items-baseline gap-1">
-                <span className="font-semibold">{totalPrice + 50 - discount}</span>
+                <span className="font-semibold text-black">{totalPrice + 50 - discount}</span>
                 <span className="text-sm text-gray-500">{t('SAR')}</span>
               </div>
             </div>

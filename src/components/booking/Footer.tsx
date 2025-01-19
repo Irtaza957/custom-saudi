@@ -23,6 +23,7 @@ export function Footer() {
     if (pathname.includes('/booking/slot')) {
       router.push('payment')
     } else if (pathname.includes('/booking/payment')) {
+      return
       handleCreateBooking()
     }
     else{
@@ -60,7 +61,7 @@ export function Footer() {
 
   return (
     <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="fixed bottom-0 left-0 right-0 z-10 bg-white border-t border-gray-200">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-2 lg:px-4 py-4 flex justify-between items-center">
         <div className="flex items-center">
           <Button
             size="icon"
@@ -84,7 +85,7 @@ export function Footer() {
                 pathname.includes('/booking/') && 'text-white'
               )} />
             </div>
-            <div className='border-t border-gray100 w-5' />
+            <div className='border-t border-gray100 w-3 lg:w-5' />
             <div className={cn(
               'border rounded-full p-1.5',
               pathname.includes('/booking/slot') && 'border-black',
@@ -97,7 +98,7 @@ export function Footer() {
                 pathname.includes('/booking/payment') && 'text-white'
               )} />
             </div>
-            <div className='border-t border-gray100 w-5' />
+            <div className='border-t border-gray100 w-3 lg:w-5' />
             <div className={cn(
               'border rounded-full p-1.5',
               pathname.includes('/booking/payment') && 'border-black',
@@ -110,7 +111,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 lg:gap-4">
           {totalPrice ? <span className="text-sm font-medium text-[#060606]"><span className='font-semibold'>{totalPrice}</span> {t('SAR')}</span> : null}
           <Button 
             dir={locale === 'ar' ? 'rtl' : 'ltr'} 

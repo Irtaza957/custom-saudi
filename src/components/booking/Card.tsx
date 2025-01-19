@@ -31,7 +31,7 @@ export function ServiceCard({ id, serviceName, priceAfter, priceBefore, selected
   }
   return (
     <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className={cn(
-      "bg-white rounded-lg px-6 py-4 space-y-4 border-4 border-white transition-all cursor-pointer",
+      "bg-white rounded-lg px-2 lg:px-6 py-4 space-y-4 border-4 border-white transition-all cursor-pointer",
       selectedService === id && 'border-black'
     )}
       onClick={() => setSelectedService?.(id || 0)}

@@ -28,8 +28,8 @@ export default function Payment() {
           <div className="flex items-center space-x-2 border rounded-lg p-4 bg-white" onClick={() => handleChange('card')}>
             <RadioGroupItem value="card" id="card" className={locale === 'ar' ? "ml-3" : ''} />
             <Label htmlFor="card" className="flex justify-between items-center w-full">
-              <span>{t('Pay with Debit/Credit Card')}</span>
-              <div className="flex gap-1">
+              <span className="text-black">{t('Pay with Debit/Credit Card')}</span>
+              <div className="flex gap-1 flex-wrap">
                 <Image 
                   src={Mada} 
                   alt="Credit Card Logos"
@@ -60,7 +60,7 @@ export default function Payment() {
             <RadioGroupItem value="tamara" id="tamara" className={`mt-1 ${locale === 'ar' ? "ml-3" : ''}`} />
             <Label htmlFor="tamara" className="flex flex-col w-full">
               <div className="flex justify-between items-center w-full">
-                <span>{t('Pay with Tamara')}</span>
+                <span className="text-black">{t('Pay with Tamara')}</span>
                 <Image 
                   src={Tabby}
                   alt="Tamara Logo"
@@ -80,7 +80,7 @@ export default function Payment() {
             <RadioGroupItem value="tabby" id="tabby" className={`mt-1 ${locale === 'ar' ? "ml-3" : ''}`}  />
             <Label htmlFor="tabby" className="flex flex-col w-full">
               <div className="flex justify-between items-center w-full">
-                <span>{t('Pay with Tabby')}</span>
+                <span className="text-black">{t('Pay with Tabby')}</span>
                 <Image 
                   src={Tamara}
                   alt="Tabby Logo"
@@ -99,7 +99,7 @@ export default function Payment() {
           <div className="flex items-center space-x-2 border rounded-lg p-4 bg-white" onClick={() => handleChange('onsite')}>
             <RadioGroupItem value="onsite" id="onsite" className={locale === 'ar' ? "ml-3" : ''}  />
             <Label htmlFor="onsite" className="flex justify-between items-center w-full">
-              <span>{t('Pay on Site')}</span>
+              <span className="text-black">{t('Pay on Site')}</span>
               <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center">
                 <svg 
                   viewBox="0 0 24 24" 
