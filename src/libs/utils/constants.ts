@@ -1,3 +1,5 @@
+import { gif1, gif10, gif11, gif12, gif13, gif14, gif15, gif16, gif17, gif18, gif19, gif2, gif20, gif21, gif22, gif3, gif4, gif5, gif6, gif7, gif8, gif9 } from "@/assets";
+
 export const services = [
   {
     id: 1,
@@ -6,6 +8,7 @@ export const services = [
     serviceName: "Paint Protection film (Half front)",
     priceBefore: 1990,
     priceAfter: 1590,
+    gif: gif1
   },
   {
     id: 2,
@@ -14,6 +17,7 @@ export const services = [
     serviceName: "Paint Protection film (Full front)",
     priceBefore: 3990,
     priceAfter: 3190,
+    gif: gif2
   },
   {
     id: 3,
@@ -21,15 +25,17 @@ export const services = [
     serviceType: "PROTECTION FILM",
     serviceName: "Paint Protection film (Brigh Full Body)",
     priceBefore: 11990,
-    priceAfter: 9590
+    priceAfter: 9590,
+    gif: gif3
   },
   {
     id: 4,
     carType: "SEDAN",
     serviceType: "PROTECTION FILM",
-    serviceName: "Paint Protection film  (MAT Full Body)",
+    serviceName: "Paint Protection film (MAT Full Body)",
     priceBefore: 13990,
     priceAfter: 11190,
+    gif: gif4
   },
   {
     id: 5,
@@ -38,6 +44,7 @@ export const services = [
     serviceName: "Thermal Tint",
     priceBefore: 1090,
     priceAfter: 890,
+    gif: gif5
   },
   {
     id: 6,
@@ -46,6 +53,7 @@ export const services = [
     serviceName: "Windshield Protection",
     priceBefore: 1090,
     priceAfter: 890,
+    gif: gif6
   },
   {
     id: 7,
@@ -54,6 +62,7 @@ export const services = [
     serviceName: "Full Polishing",
     priceBefore: 990,
     priceAfter: 790,
+    gif: gif7
   },
   {
     id: 8,
@@ -62,6 +71,7 @@ export const services = [
     serviceName: "Exterior Polish",
     priceBefore: 790,
     priceAfter: 590,
+    gif: gif8
   },
   {
     id: 9,
@@ -70,6 +80,7 @@ export const services = [
     serviceName: "Full Nano Cermaic",
     priceBefore: 1990,
     priceAfter: 1590,
+    gif: gif9
   },
   {
     id: 10,
@@ -78,6 +89,7 @@ export const services = [
     serviceName: "Exterior Nano Cermaic",
     priceBefore: 990,
     priceAfter: 790,
+    gif: gif10
   },
   {
     id: 11,
@@ -86,6 +98,7 @@ export const services = [
     serviceName: "Interior Nano Cermaic",
     priceBefore: 1190,
     priceAfter: 990,
+    gif: gif11
   },
   {
     id: 12,
@@ -94,6 +107,7 @@ export const services = [
     serviceName: "Paint Protection film (Half front)",
     priceBefore: 2390,
     priceAfter: 1990,
+    gif: gif12
   },
   {
     id: 13,
@@ -102,6 +116,7 @@ export const services = [
     serviceName: "Paint Protection film (Full front)",
     priceBefore: 4590,
     priceAfter: 3690,
+    gif: gif13
   },
   {
     id: 14,
@@ -109,15 +124,17 @@ export const services = [
     serviceType: "PROTECTION FILM",
     serviceName: "Paint Protection film (Brigh Full Body)",
     priceBefore: 13990,
-    priceAfter: 1190
+    priceAfter: 1190,
+    gif: gif14
   },
   {
     id: 15,
     carType: "SUV",
     serviceType: "PROTECTION FILM",
-    serviceName: "Paint Protection film  (MAT Full Body)",
+    serviceName: "Paint Protection film (MAT Full Body)",
     priceBefore: 15990,
     priceAfter: 12790,
+    gif: gif15
   },
   {
     id: 16,
@@ -126,6 +143,7 @@ export const services = [
     serviceName: "Thermal Tint",
     priceBefore: 1290,
     priceAfter: 1090,
+    gif: gif16
   },
   {
     id: 17,
@@ -134,6 +152,7 @@ export const services = [
     serviceName: "Windshield Protection",
     priceBefore: 1090,
     priceAfter: 890,
+    gif: gif17
   },
   {
     id: 18,
@@ -142,6 +161,7 @@ export const services = [
     serviceName: "Full Polishing",
     priceBefore: 1090,
     priceAfter: 890,
+    gif: gif18
   },
   {
     id: 19,
@@ -150,14 +170,16 @@ export const services = [
     serviceName: "Exterior Polish",
     priceBefore: 890,
     priceAfter: 690,
+    gif: gif19
   },
   {
     id: 20,
     carType: "SUV",
     serviceType: "Nano Ceramic",
-    serviceName: "Full Nano Ceramic",
+    serviceName: "Full Nano Cermaic",
     priceBefore: 2190,
     priceAfter: 1790,
+    gif: gif20
   },
   {
     id: 21,
@@ -166,6 +188,7 @@ export const services = [
     serviceName: "Exterior Nano Cermaic",
     priceBefore: 1090,
     priceAfter: 890,
+    gif: gif21
   },
   {
     id: 22,
@@ -174,6 +197,7 @@ export const services = [
     serviceName: "Interior Nano Cermaic",
     priceBefore: 1290,
     priceAfter: 1090,
+    gif: gif22
   },
 ];
 

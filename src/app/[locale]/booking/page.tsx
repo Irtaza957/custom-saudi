@@ -1,16 +1,13 @@
 'use client'
-import { Car } from '@/assets'
+import { Car, gif1, gif10, gif11, gif12, gif13, gif14, gif15, gif16, gif17, gif18, gif19, gif2, gif20, gif21, gif22, gif23, gif3, gif4, gif5, gif6, gif7, gif8, gif9 } from '@/assets'
 import { ServiceCard } from '@/components/booking/Card'
 import { NavMenu } from '@/components/booking/Sidebar'
 import { VehicleSelector } from '@/components/booking/VehicleSelector'
 import Image from 'next/image'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { useLocale, useTranslations } from 'next-intl'
-import { usePathname, useRouter } from 'next/navigation'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/UI/Dropdown'
-import { ChevronDown } from 'lucide-react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '@/store'
@@ -19,47 +16,36 @@ import { setServiceType } from '@/store/slices/booking'
 import { services } from '@/libs/utils/constants'
 
 export default function Home() {
-  const router = useRouter();
-  const pathname = usePathname();
   const [activeSlide, setActiveSlide] = useState(0);
-  const [selectedService, setSelectedService] = useState<number | null>(null)
-  const [selectedLang, setSelectedLang] = useState(pathname?.split('/')?.[1])
+  const [selectedService, setSelectedService] = useState<number>(7)
   const serviceType = useSelector((state: RootState) => state.booking.serviceType);
   const carType = useSelector((state: RootState) => state.booking.carType)
   const dispatch = useDispatch()
   const t = useTranslations()
   const locale = useLocale()
 
-  const handleSelectTab = (value: string) => {
-    dispatch(setServiceType(value))
-  }
-
-  const handleSlideChange = (index: number) => {
-    setActiveSlide(index);
-  };
-
-  const handleLanguageChange = (locale: string) => {
-    setSelectedLang(locale);
-    const segments = pathname.split('/').filter(Boolean);
-
-    // Handle locale at the first segment
-    if (['en', 'ar'].includes(segments[0])) {
-      segments[0] = locale;
-    } else {
-      segments.unshift(locale);
-    }
-
-    // Construct the new path and navigate
-    const newPath = `/${segments.join('/')}`;
-    router.push(newPath);
-    setTimeout(() => {
-      window.location.reload()
-    }, 1000)
-  };
-
   const servicesData = useMemo(() => {
     return services.filter((service) => service.carType === carType && service.serviceType.toUpperCase() === serviceType.toUpperCase())
   }, [carType, serviceType])
+
+  const handleSelectTab = (value: string) => {
+    dispatch(setServiceType(value))
+    const tab=services.filter((service) => service.carType === carType && service.serviceType.toUpperCase() === value.toUpperCase())
+    setSelectedService(tab[0]?.id)
+  }
+
+  const handleSlideChange = (index: number) => {
+    console.log(servicesData[index].id, index, 'handleSlideChangehandleSlideChange')
+    setSelectedService(servicesData[index].id)
+    setActiveSlide(index);
+  };
+
+  useEffect(()=>{
+    if(carType){
+      const tab=services.filter((service) => service.carType === carType && service.serviceType.toUpperCase() === serviceType.toUpperCase())
+      setSelectedService(tab[0]?.id)
+    }
+  },[carType])
 
   return (
     <div className='size-full'>
@@ -73,40 +59,18 @@ export default function Home() {
                 <div className="flex items-center gap-7">
                   <span className="font-bold text-lg">CUSTOM</span>
                   <div className='flex gap-3'>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="flex items-center gap-1 text-sm hover:text-gray-300 transition-colors">
-                        {selectedLang}
-                        <ChevronDown className="h-4 w-4" />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        className="w-40 bg-zinc-900 border-zinc-800"
-                      >
-                        <DropdownMenuItem
-                          onClick={() => handleLanguageChange('en')}
-                          className="text-sm text-white hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer"
-                        >
-                          en
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => handleLanguageChange('ar')}
-                          className="text-sm text-white hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer"
-                        >
-                          ar
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
                     <VehicleSelector />
                   </div>
                 </div>
                 <NavMenu />
               </div>
             </header>
-            <div className="relative overflow-hidden w-full h-[300px] md:h-[400px] lg:h-[600px]">
+            <div className="relative overflow-hidden lg:w-[95%] h-[300px] md:h-[400px] lg:h-[500px] mb-5 lg:mb-0">
               <Image
-                src={Car}
+                src={services?.find(item=>item.id===selectedService)?.gif || null}
                 alt="Car"
                 fill
-                className="object-contain"
+                className="object-contain rounded-lg"
               />
             </div>
           </div>
