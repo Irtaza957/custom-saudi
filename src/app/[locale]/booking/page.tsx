@@ -94,7 +94,7 @@ export default function Home() {
             </div>
 
             {/* Service Cards */}
-            <div className='hidden lg:block overflow-y-auto no-scrollbar lg:h-[calc(100vh-170px)] space-y-2 mb-20'>
+            <div className='hidden lg:block overflow-y-auto no-scrollbar lg:h-[calc(100vh-170px)] space-y-2 mb-16'>
               <div className="flex-1 gap-2 space-y-2">
                 {servicesData.map((service) => (
                   <ServiceCard key={service.id} selectedService={selectedService} setSelectedService={setSelectedService} {...service} />
