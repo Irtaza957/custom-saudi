@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider, useLocale } from "next-intl";
 import { getMessages } from "next-intl/server";
 import StoreProvider from "@/providers/StoreProvider";
 import { Bounce, ToastContainer } from 'react-toastify';
@@ -21,12 +21,11 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
 }>) {
   const messages=await getMessages()
+  const locale=useLocale()
   return (
     <html lang={locale}>
       <body
