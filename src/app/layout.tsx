@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { NextIntlClientProvider, useLocale } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import StoreProvider from "@/providers/StoreProvider";
-import { Bounce, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Import the Roboto font
 const roboto = Roboto({
@@ -21,11 +21,14 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-}: Readonly<{
+  params,
+}: {
   children: React.ReactNode;
-}>) {
-  const messages=await getMessages()
-  const locale=useLocale()
+  params: Promise<{ locale: string }>; // Ensure `params` is typed correctly as a Promise
+}) {
+  const { locale } = await params; // Await the params to resolve if it's a Promise
+  const messages = await getMessages();
+
   return (
     <html lang={locale}>
       <body
@@ -35,20 +38,20 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-            transition={Bounce}
-          />
-          {children}
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              transition={Bounce}
+            />
+            {children}
           </StoreProvider>
         </NextIntlClientProvider>
       </body>
