@@ -54,7 +54,7 @@ export function ServiceCard({ id, serviceName, priceAfter, priceBefore, selected
             </div>}
         </button>
       </div>
-      <div className="bg-zinc-900 rounded-lg p-4 flex flex-wrap items-center justify-between">
+      <div className="bg-zinc-900 rounded-lg p-4 flex flex- items-center justify-between">
         <div className=" gap-1">
           <div className="text-white text-lg md:text-xl font-bold">{priceAfter.toLocaleString()} <span className="text-white text-xs md:text-sm">{t('SAR')}</span></div>
 
