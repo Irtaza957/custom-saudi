@@ -68,12 +68,13 @@ body {
 }
 
 .dayPicker .rdp-weekday{
-  text-align: start;
+  /* text-align: start; */
   padding-left: 10px;
 }
 
 .dayPicker .rdp-day{
   height: 60px;
+  color: black;
 }
 
 .dayPicker .rdp-month_caption{
@@ -112,6 +113,6 @@ body {
   padding-right: 6px; /* Adjust the padding between slides */
 }
 
-.rdp-day{
+/* .rdp-day{
   color: black;
-}
+} */

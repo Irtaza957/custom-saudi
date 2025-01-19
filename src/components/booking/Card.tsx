@@ -54,7 +54,7 @@ export function ServiceCard({ id, serviceName, priceAfter, priceBefore, selected
             </div>}
         </button>
       </div>
-      <div className="bg-zinc-900 rounded-lg p-4 flex items-center justify-between">
+      <div className="bg-zinc-900 rounded-lg p-4 flex flex-wrap items-center justify-between">
         <div className=" gap-1">
           <div className="text-white text-xl font-bold">{priceAfter.toLocaleString()} <span className="text-white text-sm">{t('SAR')}</span></div>
 
@@ -64,7 +64,7 @@ export function ServiceCard({ id, serviceName, priceAfter, priceBefore, selected
           </div>
         </div>
         <div className="flex items-center gap-1">
-          <span className="text-xs text-white">{t('Pay with')}</span>
+          <span className="text-xs text-white whitespace-nowrap">{t('Pay with')}</span>
           <div className="relative w-16 h-16">
             <Image
               src={Tabby}
