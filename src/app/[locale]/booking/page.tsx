@@ -1,5 +1,4 @@
 'use client'
-import { Car, gif1, gif10, gif11, gif12, gif13, gif14, gif15, gif16, gif17, gif18, gif19, gif2, gif20, gif21, gif22, gif23, gif3, gif4, gif5, gif6, gif7, gif8, gif9 } from '@/assets'
 import { ServiceCard } from '@/components/booking/Card'
 import { NavMenu } from '@/components/booking/Sidebar'
 import { VehicleSelector } from '@/components/booking/VehicleSelector'
@@ -16,7 +15,7 @@ import { setServiceType } from '@/store/slices/booking'
 import { services } from '@/libs/utils/constants'
 
 export default function Home() {
-  const [activeSlide, setActiveSlide] = useState(0);
+  // const [activeSlide, setActiveSlide] = useState(0);
   const [selectedService, setSelectedService] = useState<number>(7)
   const serviceType = useSelector((state: RootState) => state.booking.serviceType);
   const carType = useSelector((state: RootState) => state.booking.carType)
@@ -37,7 +36,7 @@ export default function Home() {
   const handleSlideChange = (index: number) => {
     console.log(servicesData[index].id, index, 'handleSlideChangehandleSlideChange')
     setSelectedService(servicesData[index].id)
-    setActiveSlide(index);
+    // setActiveSlide(index);
   };
 
   useEffect(()=>{
@@ -45,7 +44,7 @@ export default function Home() {
       const tab=services.filter((service) => service.carType === carType && service.serviceType.toUpperCase() === serviceType.toUpperCase())
       setSelectedService(tab[0]?.id)
     }
-  },[carType])
+  },[carType, serviceType])
 
   return (
     <div className='size-full'>
@@ -67,7 +66,7 @@ export default function Home() {
             </header>
             <div className="relative overflow-hidden lg:w-[95%] h-[300px] md:h-[400px] lg:h-[500px] mb-5 lg:mb-0">
               <Image
-                src={services?.find(item=>item.id===selectedService)?.gif || null}
+                src={services?.find(item=>item.id===selectedService)?.gif || ''}
                 alt="Car"
                 fill
                 className="object-contain rounded-lg"

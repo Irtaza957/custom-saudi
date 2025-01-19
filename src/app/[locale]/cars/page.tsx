@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import useEmblaCarousel, { EmblaCarouselType } from "embla-carousel-react";
+import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@/components/UI/Button";
 import { bgShadow, SedanImg, SUVImg } from "@/assets";
 import Image, { StaticImageData } from "next/image";
@@ -49,7 +49,7 @@ export default function CarSelector() {
     [emblaApi]
   );
 
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+  const onSelect = useCallback((emblaApi: any) => {
     setPrevBtnEnabled(emblaApi.canScrollPrev());
     setNextBtnEnabled(emblaApi.canScrollNext());
     setSelectedIndex(emblaApi.selectedScrollSnap());
